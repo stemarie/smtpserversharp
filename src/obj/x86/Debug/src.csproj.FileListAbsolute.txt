@@ -1,7 +1,0 @@
-F:\Karell\Git\SmtpServerSharp\src\obj\x86\Debug\ResolveAssemblyReference.cache
-F:\Karell\Git\SmtpServerSharp\src\bin\Debug\src.dll
-F:\Karell\Git\SmtpServerSharp\src\bin\Debug\src.pdb
-F:\Karell\Git\SmtpServerSharp\src\bin\Debug\log4net.dll
-F:\Karell\Git\SmtpServerSharp\src\bin\Debug\log4net.xml
-F:\Karell\Git\SmtpServerSharp\src\obj\x86\Debug\src.dll
-F:\Karell\Git\SmtpServerSharp\src\obj\x86\Debug\src.pdb
