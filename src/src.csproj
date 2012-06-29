@@ -47,7 +47,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\EmailAddress.cs" />
     <Compile Include="Common\InvalidEmailAddressException.cs" />
     <Compile Include="Mailbox\IFolder.cs" />
     <Compile Include="Mailbox\MailboxManager.cs" />

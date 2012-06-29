@@ -224,6 +224,15 @@ namespace src.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid E-Mail address detected.
+        /// </summary>
+        internal static string Log_Invalid_E_Mail_address_detected {
+            get {
+                return ResourceManager.GetString("Log_Invalid_E_Mail_address_detected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection {0}: MailFrom address: {1} accepted..
         /// </summary>
         internal static string Log_Mail_Connection_0_MailFrom_address_1_accepted {
@@ -265,6 +274,15 @@ namespace src.Properties {
         internal static string Log_Socket_closed_before_end_of_line_received {
             get {
                 return ResourceManager.GetString("Log_Socket_closed_before_end_of_line_received", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown exception occured.
+        /// </summary>
+        internal static string Log_Unknown_exception_occured {
+            get {
+                return ResourceManager.GetString("Log_Unknown_exception_occured", resourceCulture);
             }
         }
         

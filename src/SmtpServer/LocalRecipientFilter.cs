@@ -1,4 +1,4 @@
-using src.Common;
+using System.Net.Mail;
 
 namespace src.SmtpServer
 {
@@ -34,9 +34,9 @@ namespace src.SmtpServer
         /// </summary>
         /// <param name='context'>The SMTPContext</param>
         /// <param name='recipient'>TODO - add parameter description</param>
-        public virtual bool AcceptRecipient(SMTPContext context, EmailAddress recipient)
+        public virtual bool AcceptRecipient(SMTPContext context, MailAddress recipient)
         {
-            return domain.Equals(recipient.Domain);
+            return domain.Equals(recipient.Host);
         }
 
         #endregion

@@ -200,4 +200,10 @@
   <data name="EMAIL_by_0_Eric_Daugherty_s_C_Email_Server">
     <value xml:space="preserve">     by {0} (Eric Daugherty's C# Email Server)</value>
   </data>
+  <data name="Log_Invalid_E_Mail_address_detected">
+    <value xml:space="preserve">Invalid E-Mail address detected</value>
+  </data>
+  <data name="Log_Unknown_exception_occured">
+    <value xml:space="preserve">Unknown exception occured</value>
+  </data>
 </root>

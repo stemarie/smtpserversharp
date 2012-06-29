@@ -1,4 +1,4 @@
-using src.Common;
+using System.Net.Mail;
 
 namespace src.SmtpServer
 {
@@ -20,6 +20,6 @@ namespace src.SmtpServer
         /// it should be accepted as a valid address.
         /// </summary>
         /// <returns>True if the address should be accepted.</returns>
-        bool AcceptRecipient(SMTPContext context, EmailAddress recipient);
+        bool AcceptRecipient(SMTPContext context, MailAddress recipient);
     }
 }

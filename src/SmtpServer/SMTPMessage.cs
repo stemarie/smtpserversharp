@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
-using src.Common;
 
 namespace src.SmtpServer
 {
@@ -20,7 +21,7 @@ namespace src.SmtpServer
         #region Variables
 
         private readonly StringBuilder data;
-        private readonly ArrayList recipientAddresses;
+        private readonly List<MailAddress> recipientAddresses;
 
         private Hashtable headerFields;
 
@@ -33,7 +34,7 @@ namespace src.SmtpServer
         /// </summary>
         public SMTPMessage()
         {
-            recipientAddresses = new ArrayList();
+            recipientAddresses = new List<MailAddress>();
             data = new StringBuilder();
         }
 
@@ -55,15 +56,15 @@ namespace src.SmtpServer
         /// The email address of the person
         /// that sent this email.
         /// </summary>
-        public EmailAddress FromAddress { get; set; }
+        public MailAddress FromAddress { get; set; }
 
         /// <summary>
         /// The addresses that this message will be
         /// delivered to.
         /// </summary>
-        public EmailAddress[] ToAddresses
+        public MailAddress[] ToAddresses
         {
-            get { return (EmailAddress[])recipientAddresses.ToArray(typeof(EmailAddress)); }
+            get { return recipientAddresses.ToArray(); }
         }
 
         /// <summary>Message data.</summary>
@@ -82,7 +83,7 @@ namespace src.SmtpServer
         }
 
         /// <summary>Addes an address to the recipient list.</summary>
-        public void AddToAddress(EmailAddress address)
+        public void AddToAddress(MailAddress address)
         {
             recipientAddresses.Add(address);
         }

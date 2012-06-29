@@ -1,5 +1,6 @@
+using System;
+using System.Net.Mail;
 using NUnit.Framework;
-using src.Common;
 
 namespace src_test.Common
 {
@@ -17,10 +18,10 @@ namespace src_test.Common
         public void TestAddress()
         {
             const string addressString = "user@mydomain.com";
-            var address = new EmailAddress(addressString);
+            var address = new MailAddress(addressString);
 
-            Assert.AreEqual("user", address.Username, "Username incorrect");
-            Assert.AreEqual("mydomain.com", address.Domain, "Domain incorrect");
+            Assert.AreEqual("user", address.User, "Username incorrect");
+            Assert.AreEqual("mydomain.com", address.Host, "Domain incorrect");
             Assert.AreEqual(addressString, address.Address, "Address incorrect");
             Assert.AreEqual(addressString, address.ToString(), "ToString incorrect");
         }
@@ -29,131 +30,124 @@ namespace src_test.Common
         public void TestAddress1()
         {
             const string addressString = "eric@ericdomain.com";
-            var address = new EmailAddress(addressString);
+            var address = new MailAddress(addressString);
 
-            Assert.AreEqual("eric", address.Username, "Username incorrect");
-            Assert.AreEqual("ericdomain.com", address.Domain, "Domain incorrect");
+            Assert.AreEqual("eric", address.User, "Username incorrect");
+            Assert.AreEqual("ericdomain.com", address.Host, "Domain incorrect");
             Assert.AreEqual(addressString, address.Address, "Address incorrect");
             Assert.AreEqual(addressString, address.ToString(), "ToString incorrect");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestAddressInvalid1()
         {
-            new EmailAddress("us@er@mydomain.com");
+            new MailAddress("us@er@mydomain.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestAddressInvalid2()
         {
-            new EmailAddress("user@mydo:main.com");
+            new MailAddress("user@mydo:main.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestAddressNoAt()
         {
-            new EmailAddress("usermydomain.com");
+            new MailAddress("usermydomain.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestAddressNoDomain()
         {
-            new EmailAddress("user@");
+            new MailAddress("user@");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestAddressNoUsername()
         {
-            new EmailAddress("@mydomain.com");
+            new MailAddress("@mydomain.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestEmptyDomain()
         {
-            new EmailAddress("user", "");
+            new MailAddress("user", "");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestEmptyUsername()
         {
-            new EmailAddress("", "mydomain.com");
+            new MailAddress("", "mydomain.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestInvalidDomain1()
         {
-            new EmailAddress("user", "mydom]in.com");
+            new MailAddress("user", "mydom]in.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestInvalidDomain2()
         {
-            new EmailAddress("user", "mydo;main.com");
+            new MailAddress("user", "mydo;main.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestInvalidDomain3()
         {
-            new EmailAddress("user", "mydo\"main.com");
+            new MailAddress("user", "mydo\"main.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
-        public void TestInvalidUsername1()
-        {
-            new EmailAddress("m@e", "mydomain.com");
-        }
-
-        [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestInvalidUsername2()
         {
-            new EmailAddress("m<e", "mydomain.com");
+            new MailAddress("m<e", "mydomain.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestInvalidUsername3()
         {
-            new EmailAddress("m:e", "mydomain.com");
+            new MailAddress("m:e", "mydomain.com");
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(FormatException))]
         public void TestNullDomain()
         {
-            new EmailAddress("user", null);
+            new MailAddress("user", null);
         }
 
         [Test]
-        [ExpectedException(typeof (InvalidEmailAddressException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void TestNullUsername()
         {
-            new EmailAddress(null, "mydomain.com");
+            new MailAddress(null, "mydomain.com");
         }
 
         [Test]
         public void TestValidUsername()
         {
-            var address = new EmailAddress("us er", "mydomain.com");
+            var address = new MailAddress("user@mydomain.com");
 
-            Assert.IsTrue("us er".Equals(address.Username), "Username incorrect");
-            Assert.IsTrue("mydomain.com".Equals(address.Domain), "Domain incorrect");
-            Assert.IsTrue("us er@mydomain.com".Equals(address.Address), "Address incorrect");
-            Assert.IsTrue("us er@mydomain.com".Equals(address.ToString()), "ToString incorrect");
+            Assert.IsTrue("user".Equals(address.User), "Username incorrect");
+            Assert.IsTrue("mydomain.com".Equals(address.Host), "Domain incorrect");
+            Assert.IsTrue("user@mydomain.com".Equals(address.Address), "Address incorrect");
+            Assert.IsTrue("user@mydomain.com".Equals(address.ToString()), "ToString incorrect");
 
-            address = new EmailAddress("my_name", "my_domain.com");
-            address = new EmailAddress("my_name100@mydomain.com");
+            address = new MailAddress("my_name@my_domain.com");
+            address = new MailAddress("my_name100@mydomain.com");
         }
     }
 }

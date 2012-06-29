@@ -1,5 +1,5 @@
+using System.Net.Mail;
 using log4net;
-using src.Common;
 
 namespace src.SmtpSender
 {
@@ -37,7 +37,7 @@ namespace src.SmtpSender
         /// <param name="data">
         /// The raw message data.
         /// </param>
-        public void DeliverMessage(string domain, EmailAddress[] addresses, string data)
+        public void DeliverMessage(string domain, MailAddress[] addresses, string data)
         { }
 
         #endregion

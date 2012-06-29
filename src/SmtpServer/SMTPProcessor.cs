@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -400,7 +401,7 @@ namespace src.SmtpServer
                 {
                     try
                     {
-                        var emailAddress = new EmailAddress(address);
+                        var emailAddress = new MailAddress(address);
                         context.Message.FromAddress = emailAddress;
                         context.LastCommand = COMMAND_MAIL;
                         addressValid = true;
@@ -409,9 +410,13 @@ namespace src.SmtpServer
                             log.Debug(String.Format(Resources.Log_Mail_Connection_0_MailFrom_address_1_accepted,
                                                     context.ConnectionId, address));
                     }
-                    catch (InvalidEmailAddressException)
+                    catch (FormatException ex)
                     {
-                        // This is fine, just fall through.
+                        log.Warn(Resources.Log_Invalid_E_Mail_address_detected, ex);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error(Resources.Log_Unknown_exception_occured, ex);
                     }
                 }
 
@@ -445,7 +450,7 @@ namespace src.SmtpServer
                 {
                     try
                     {
-                        var emailAddress = new EmailAddress(address);
+                        var emailAddress = new MailAddress(address);
 
                         // Check to make sure we want to accept this message.
                         if (recipientFilter.AcceptRecipient(context, emailAddress))
