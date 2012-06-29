@@ -1,7 +1,6 @@
-using System;
-using EricDaugherty.CSES.Common;
+using src.Common;
 
-namespace EricDaugherty.CSES.Mailbox
+namespace src.Mailbox
 {
 	/// <summary>
 	/// The folder class defines the interface used to 

@@ -1,9 +1,7 @@
-using System;
-using System.Net;
 using log4net;
-using EricDaugherty.CSES.Common;
-	
-namespace EricDaugherty.CSES.SmtpSender
+using src.Common;
+
+namespace src.SmtpSender
 {
 	/// <summary>
 	/// This class provides the ability to deliver

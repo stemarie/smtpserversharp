@@ -1,6 +1,4 @@
-using System;
-
-namespace EricDaugherty.CSES.Mailbox
+namespace src.Mailbox
 {
 	/// <summary>
 	/// Mailbox Manager is a singleton class that provides

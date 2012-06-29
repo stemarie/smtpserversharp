@@ -1,12 +1,9 @@
-using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using log4net;
-using EricDaugherty.CSES.Common;
-using EricDaugherty.CSES.SmtpServer;
 
-namespace EricDaugherty.CSES.Net
+namespace src.Net
 {
 	/// <summary>
 	/// The delegate that is called when to process a new connection (Socket).

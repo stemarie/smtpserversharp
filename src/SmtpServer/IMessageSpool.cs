@@ -1,4 +1,4 @@
-namespace EricDaugherty.CSES.SmtpServer
+namespace src.SmtpServer
 {
 	/// <summary>
 	/// Provides an interface for the SMTPProcessor to use

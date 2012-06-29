@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace EricDaugherty.CSES.Common
+namespace src.Common
 {	
 	/// <summary>
 	/// Stores a single EmailAddress.  The class will only

@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using System.Text;
-
-using EricDaugherty.CSES.Common;
 using System.Text.RegularExpressions;
 
-namespace EricDaugherty.CSES.SmtpServer
+namespace src.SmtpServer
 {
 	/// <summary>
 	/// Stores a single part of a multipart message.

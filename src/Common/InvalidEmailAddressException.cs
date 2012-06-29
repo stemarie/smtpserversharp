@@ -1,6 +1,6 @@
 using System;
 
-namespace EricDaugherty.CSES.Common
+namespace src.Common
 {
 	/// <summary>
 	/// Indicates that an email address is not valid.

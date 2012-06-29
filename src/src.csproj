@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
     <RootNamespace>src</RootNamespace>
-    <AssemblyName>src</AssemblyName>
+    <AssemblyName>SRC</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -44,32 +44,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EricDaugherty\CSES\Common\EmailAddress.cs" />
-    <Compile Include="EricDaugherty\CSES\Common\InvalidEmailAddressException.cs" />
-    <Compile Include="EricDaugherty\CSES\Mailbox\IFolder.cs" />
-    <Compile Include="EricDaugherty\CSES\Mailbox\MailboxManager.cs" />
-    <Compile Include="EricDaugherty\CSES\Net\SimpleServer.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpSender\SMTPSender.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\FileSpool\FileMessageSpool.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\IMessageSpool.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\IRecipientFilter.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\LocalRecipientFilter.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\MemoryMessageSpool.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPContext.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPMessage.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPMessagePart.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPProcessor.cs" />
+    <Compile Include="Common\EmailAddress.cs" />
+    <Compile Include="Common\InvalidEmailAddressException.cs" />
+    <Compile Include="Mailbox\IFolder.cs" />
+    <Compile Include="Mailbox\MailboxManager.cs" />
+    <Compile Include="Net\SimpleServer.cs" />
+    <Compile Include="SmtpSender\SMTPSender.cs" />
+    <Compile Include="SmtpServer\FileSpool\FileMessageSpool.cs" />
+    <Compile Include="SmtpServer\IMessageSpool.cs" />
+    <Compile Include="SmtpServer\IRecipientFilter.cs" />
+    <Compile Include="SmtpServer\LocalRecipientFilter.cs" />
+    <Compile Include="SmtpServer\MemoryMessageSpool.cs" />
+    <Compile Include="SmtpServer\SMTPContext.cs" />
+    <Compile Include="SmtpServer\SMTPMessage.cs" />
+    <Compile Include="SmtpServer\SMTPMessagePart.cs" />
+    <Compile Include="SmtpServer\SMTPProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="EricDaugherty" />
-    <Folder Include="EricDaugherty\CSES" />
-    <Folder Include="EricDaugherty\CSES\Common" />
-    <Folder Include="EricDaugherty\CSES\Mailbox" />
-    <Folder Include="EricDaugherty\CSES\Net" />
-    <Folder Include="EricDaugherty\CSES\SmtpSender" />
-    <Folder Include="EricDaugherty\CSES\SmtpServer" />
-    <Folder Include="EricDaugherty\CSES\SmtpServer\FileSpool" />
+    <Folder Include="Common" />
+    <Folder Include="Mailbox" />
+    <Folder Include="Net" />
+    <Folder Include="SmtpSender" />
+    <Folder Include="SmtpServer" />
+    <Folder Include="SmtpServer\FileSpool" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

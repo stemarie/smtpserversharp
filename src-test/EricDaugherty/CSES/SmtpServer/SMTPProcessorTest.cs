@@ -6,7 +6,7 @@ using System.Threading;
 using log4net;
 using log4net.Config;
 using NUnit.Framework;
-using EricDaugherty.CSES.Net;
+using src.SmtpServer;
 
 namespace EricDaugherty.CSES.SmtpServer
 {

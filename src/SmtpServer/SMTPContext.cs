@@ -1,11 +1,11 @@
-namespace EricDaugherty.CSES.SmtpServer
+using System;
+using System.Net.Sockets;
+using System.Text;
+using log4net;
+
+namespace src.SmtpServer
 {
-	using System;
-	using System.Net.Sockets;
-	using System.Text;
-	using log4net;
-	
-	/// <summary>
+    /// <summary>
 	/// Maintains the current state for a SMTP client connection.
 	/// </summary>
 	/// <remarks>

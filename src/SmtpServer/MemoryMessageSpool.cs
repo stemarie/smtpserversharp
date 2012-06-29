@@ -1,10 +1,8 @@
-namespace EricDaugherty.CSES.SmtpServer
+using System.Collections;
+
+namespace src.SmtpServer
 {
-	using System;
-	using System.Collections;
-	
-	
-	/// <summary>
+    /// <summary>
 	/// Provides a memory based IMessageSpool.
 	/// </summary>
 	public class MemoryMessageSpool : IMessageSpool

@@ -1,15 +1,14 @@
-namespace EricDaugherty.CSES.SmtpServer
+using src.Common;
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Text.RegularExpressions;
+using log4net;
+
+namespace src.SmtpServer
 {
-	using System;
-	using System.Net;
-	using System.Net.Sockets;
-	using System.Text;
-	using System.Text.RegularExpressions;
-	using log4net;
-	using EricDaugherty.CSES.Common;
-	
-	
-	/// <summary>
+    /// <summary>
 	/// SMTPProcessor handles a single SMTP client connection.  This
 	/// class provides an implementation of the RFC821 specification.
 	/// </summary>

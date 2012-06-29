@@ -1,3 +1,5 @@
+using src.Common;
+
 namespace EricDaugherty.CSES.Common
 {
 	using System;
@@ -155,8 +157,8 @@ namespace EricDaugherty.CSES.Common
 		{
 			string addressString = "user@mydomain.com";
 			EmailAddress address = new EmailAddress( addressString );
-			
-			Assert.AreEqual( "Username incorrect", "user", address.Username );
+
+            Assert.AreEqual("user", address.Username, "Username incorrect");
 			Assert.AreEqual("mydomain.com", address.Domain, "Domain incorrect"  );
 			Assert.AreEqual( addressString, address.Address, "Address incorrect" );
 			Assert.AreEqual(addressString, address.ToString(), "ToString incorrect" );

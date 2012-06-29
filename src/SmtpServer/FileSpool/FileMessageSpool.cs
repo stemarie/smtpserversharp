@@ -1,8 +1,8 @@
 using System;
 using System.IO;
 using log4net;
-	
-namespace EricDaugherty.CSES.SmtpServer
+
+namespace src.SmtpServer.FileSpool
 {
 	/// <summary>
 	/// Stores Spooled SMTPMessages as files.

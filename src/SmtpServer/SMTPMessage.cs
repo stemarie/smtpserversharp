@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Text;
-using EricDaugherty.CSES.Common;
 using System.Text.RegularExpressions;
+using src.Common;
 
-namespace EricDaugherty.CSES.SmtpServer
+namespace src.SmtpServer
 {
 	/// <summary>
 	/// Stores an incoming SMTP Message.

@@ -1,11 +1,8 @@
-namespace EricDaugherty.CSES.SmtpServer
-{
+using src.Common;
 
-	using System;
-	using EricDaugherty.CSES.Common;
-	
-	
-	/// <summary>
+namespace src.SmtpServer
+{
+    /// <summary>
 	/// Allows all email addresses addressed to the local domain specified
 	/// in the constructor.
 	/// </summary>	

@@ -1,7 +1,6 @@
-using System;
-using EricDaugherty.CSES.Common;
+using src.Common;
 
-namespace EricDaugherty.CSES.SmtpServer
+namespace src.SmtpServer
 {
 	/// <summary>
 	/// Allows filtering of incoming email by recipient address.
