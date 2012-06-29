@@ -98,10 +98,10 @@ namespace EricDaugherty.CSES.Common
 		{
 			EmailAddress address = new EmailAddress( "us er", "mydomain.com" );
 			
-			Assertion.Assert( "Username incorrect", "us er".Equals( address.Username ) );
-			Assertion.Assert( "Domain incorrect", "mydomain.com".Equals( address.Domain ) );			
-			Assertion.Assert( "Address incorrect", "us er@mydomain.com".Equals( address.Address ) );
-			Assertion.Assert( "ToString incorrect", "us er@mydomain.com".Equals( address.ToString() ) );
+			Assert.IsTrue("us er".Equals( address.Username ), "Username incorrect" );
+			Assert.IsTrue( "mydomain.com".Equals( address.Domain ),"Domain incorrect"  );
+			Assert.IsTrue("us er@mydomain.com".Equals( address.Address ), "Address incorrect" );
+			Assert.IsTrue("us er@mydomain.com".Equals( address.ToString()), "ToString incorrect" );
 
 			address = new EmailAddress( "my_name", "my_domain.com" );
 			address = new EmailAddress( "my_name100@mydomain.com" );
@@ -156,10 +156,10 @@ namespace EricDaugherty.CSES.Common
 			string addressString = "user@mydomain.com";
 			EmailAddress address = new EmailAddress( addressString );
 			
-			Assertion.AssertEquals( "Username incorrect", "user", address.Username );
-			Assertion.AssertEquals( "Domain incorrect", "mydomain.com", address.Domain );
-			Assertion.AssertEquals( "Address incorrect", addressString, address.Address );
-			Assertion.AssertEquals( "ToString incorrect", addressString, address.ToString() );
+			Assert.AreEqual( "Username incorrect", "user", address.Username );
+			Assert.AreEqual("mydomain.com", address.Domain, "Domain incorrect"  );
+			Assert.AreEqual( addressString, address.Address, "Address incorrect" );
+			Assert.AreEqual(addressString, address.ToString(), "ToString incorrect" );
 		}		
 		
 		[Test]
@@ -168,10 +168,10 @@ namespace EricDaugherty.CSES.Common
 			string addressString = "eric@ericdomain.com";
 			EmailAddress address = new EmailAddress( addressString );
 			
-			Assertion.AssertEquals( "Username incorrect", "eric", address.Username );
-			Assertion.AssertEquals( "Domain incorrect", "ericdomain.com", address.Domain );
-			Assertion.AssertEquals( "Address incorrect", addressString, address.Address );
-			Assertion.AssertEquals( "ToString incorrect", addressString, address.ToString() );
+			Assert.AreEqual(  "eric", address.Username, "Username incorrect");
+			Assert.AreEqual( "ericdomain.com", address.Domain, "Domain incorrect");
+			Assert.AreEqual( addressString, address.Address, "Address incorrect");
+			Assert.AreEqual( addressString, address.ToString(), "ToString incorrect");
 		}
 
 		#endregion

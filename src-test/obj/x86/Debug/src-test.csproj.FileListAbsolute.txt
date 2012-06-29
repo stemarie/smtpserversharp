@@ -1,0 +1,11 @@
+F:\Karell\Git\SmtpServerSharp\src-test\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\Karell\Git\SmtpServerSharp\src-test\bin\Debug\src-test.dll
+F:\Karell\Git\SmtpServerSharp\src-test\bin\Debug\src-test.pdb
+F:\Karell\Git\SmtpServerSharp\src-test\bin\Debug\log4net.dll
+F:\Karell\Git\SmtpServerSharp\src-test\bin\Debug\nunit.framework.dll
+F:\Karell\Git\SmtpServerSharp\src-test\bin\Debug\src.dll
+F:\Karell\Git\SmtpServerSharp\src-test\bin\Debug\src.pdb
+F:\Karell\Git\SmtpServerSharp\src-test\bin\Debug\log4net.xml
+F:\Karell\Git\SmtpServerSharp\src-test\bin\Debug\nunit.framework.xml
+F:\Karell\Git\SmtpServerSharp\src-test\obj\x86\Debug\src-test.dll
+F:\Karell\Git\SmtpServerSharp\src-test\obj\x86\Debug\src-test.pdb

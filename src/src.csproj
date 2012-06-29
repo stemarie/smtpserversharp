@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{347EF6DB-F563-40FF-A645-BB7AD2B1AE84}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>src</RootNamespace>
+    <AssemblyName>src</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-client\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EricDaugherty\CSES\Common\EmailAddress.cs" />
+    <Compile Include="EricDaugherty\CSES\Common\InvalidEmailAddressException.cs" />
+    <Compile Include="EricDaugherty\CSES\Mailbox\IFolder.cs" />
+    <Compile Include="EricDaugherty\CSES\Mailbox\MailboxManager.cs" />
+    <Compile Include="EricDaugherty\CSES\Net\SimpleServer.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpSender\SMTPSender.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\FileSpool\FileMessageSpool.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\IMessageSpool.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\IRecipientFilter.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\LocalRecipientFilter.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\MemoryMessageSpool.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPContext.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPMessage.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPMessagePart.cs" />
+    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EricDaugherty" />
+    <Folder Include="EricDaugherty\CSES" />
+    <Folder Include="EricDaugherty\CSES\Common" />
+    <Folder Include="EricDaugherty\CSES\Mailbox" />
+    <Folder Include="EricDaugherty\CSES\Net" />
+    <Folder Include="EricDaugherty\CSES\SmtpSender" />
+    <Folder Include="EricDaugherty\CSES\SmtpServer" />
+    <Folder Include="EricDaugherty\CSES\SmtpServer\FileSpool" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

@@ -152,11 +152,11 @@ namespace EricDaugherty.CSES.SmtpServer
 			SMTPMessage message = new SMTPMessage();
 			message.AddData( TEST_SINGLE_BASE64 );
 
-			Assertion.AssertEquals( "Received", "from development02 (development02 [127.0.0.1]) by adexs.com (Eric Daugherty's C# Email Server) 4/16/2004 10:35:58 AM", message.Headers["Received"] );
-			Assertion.AssertEquals( "From", "\"Eric Daugherty\" <edaugherty@adexs.com>", message.Headers["From" ] );
-			Assertion.AssertEquals( "Subject", "CofAs", message.Headers["Subject"] );
-			Assertion.AssertEquals( "Date", "Fri, 16 Apr 2004 10:35:55 -0500", message.Headers["Date"] );
-			Assertion.AssertEquals( "X-MimeOLE", "Produced By Microsoft MimeOLE V6.00.2800.1409", message.Headers["X-MimeOLE"] );
+			Assert.AreEqual( "from development02 (development02 [127.0.0.1]) by adexs.com (Eric Daugherty's C# Email Server) 4/16/2004 10:35:58 AM", message.Headers["Received"],"Received" );
+			Assert.AreEqual( "\"Eric Daugherty\" <edaugherty@adexs.com>", message.Headers["From" ], "From" );
+			Assert.AreEqual( "CofAs", message.Headers["Subject"],"Subject" );
+			Assert.AreEqual( "Fri, 16 Apr 2004 10:35:55 -0500", message.Headers["Date"],"Date" );
+			Assert.AreEqual( "Produced By Microsoft MimeOLE V6.00.2800.1409", message.Headers["X-MimeOLE"],"X-MimeOLE" );
 		}
 
 		[Test]
@@ -167,11 +167,11 @@ namespace EricDaugherty.CSES.SmtpServer
 		  
 		  SMTPMessagePart[] messageParts = message.MessageParts;
 
-			Assertion.AssertEquals( "AttachmentCount", 1, messageParts.Length );
-			Assertion.AssertEquals( "AttachmentHeaderData", ATTACHMENT_1_HEADER_DATA, messageParts[0].HeaderData );
-			Assertion.AssertEquals( "AttachmentBodyData", ATTACHMENT_1_BODY_DATA, messageParts[0].BodyData );
-			Assertion.AssertEquals( "AttachmentContentType", "application/pdf; name=\"000000001.pdf\"", messageParts[0].Headers["Content-Type"] );
-			Assertion.AssertEquals( "AttachmentContentDisposition", "attachment; filename=\"000000001.pdf\"", messageParts[0].Headers["Content-Disposition"] );
+			Assert.AreEqual( 1, messageParts.Length,"AttachmentCount" );
+			Assert.AreEqual( ATTACHMENT_1_HEADER_DATA, messageParts[0].HeaderData,"AttachmentHeaderData" );
+			Assert.AreEqual( ATTACHMENT_1_BODY_DATA, messageParts[0].BodyData, "AttachmentBodyData" );
+			Assert.AreEqual( "application/pdf; name=\"000000001.pdf\"", messageParts[0].Headers["Content-Type"], "AttachmentContentType" );
+			Assert.AreEqual( "attachment; filename=\"000000001.pdf\"", messageParts[0].Headers["Content-Disposition"], "AttachmentContentDisposition" );
 
 		}
 
@@ -183,11 +183,11 @@ namespace EricDaugherty.CSES.SmtpServer
 		  
 		  SMTPMessagePart[] messageParts = message.MessageParts;
 
-			Assertion.AssertEquals( "AttachmentCount", 2, messageParts.Length );
-			Assertion.AssertEquals( "AttachmentHeaderData1", ATTACHMENT_1_HEADER_DATA, messageParts[0].HeaderData );
-			Assertion.AssertEquals( "AttachmentBodyData1", ATTACHMENT_1_BODY_DATA, messageParts[0].BodyData );
-			Assertion.AssertEquals( "AttachmentContentType1", "application/pdf; name=\"000000001.pdf\"", messageParts[0].Headers["Content-Type"] );
-			Assertion.AssertEquals( "AttachmentContentDisposition1", "attachment; filename=\"000000001.pdf\"", messageParts[0].Headers["Content-Disposition"] );
+			Assert.AreEqual( 2, messageParts.Length, "AttachmentCount" );
+			Assert.AreEqual( ATTACHMENT_1_HEADER_DATA, messageParts[0].HeaderData, "AttachmentHeaderData1" );
+			Assert.AreEqual( ATTACHMENT_1_BODY_DATA, messageParts[0].BodyData, "AttachmentBodyData1" );
+			Assert.AreEqual( "application/pdf; name=\"000000001.pdf\"", messageParts[0].Headers["Content-Type"], "AttachmentContentType1" );
+			Assert.AreEqual( "attachment; filename=\"000000001.pdf\"", messageParts[0].Headers["Content-Disposition"], "AttachmentContentDisposition1" );
 		}
 
 		[Test]
@@ -198,8 +198,8 @@ namespace EricDaugherty.CSES.SmtpServer
 		  
 		  SMTPMessagePart[] messageParts = message.MessageParts;
 		  
-			Assertion.AssertEquals( "AttachmentCount", 0, messageParts.Length );
-			Assertion.AssertEquals( "ContentDisposition", "attachment; filename=\"000000002.pdf\"", message.Headers["Content-Disposition"] );
+			Assert.AreEqual( 0, messageParts.Length, "AttachmentCount" );
+			Assert.AreEqual( "attachment; filename=\"000000002.pdf\"", message.Headers["Content-Disposition"], "ContentDisposition" );
 		}
 
 		#endregion
