@@ -1,0 +1,38 @@
+C# Email Server - Eric Daugherty
+web@ericdaugherty.com
+http://www.ericdaugherty.com/dev/cses
+--------------------------------------------
+Please refer to:
+http://www.ericdaugherty.com/dev/cses
+for additional documentation.
+
+
+
+Revision History
+----------------
+
+Release 0.3 - 07/13/2004  
+
+Fixed bug that caused infinite loop.  Caused when clients disconnect improperly.
+
+Added ability to easily pull Header values from SMTPMessage and SMTPMessagePart
+
+Duplicate header keys (ex: Received) are not supported.  The last header key wins.
+
+Fixed Regex of mail addresses in SMTPProcessor.
+
+Fixed text replacement in user overridable SMTP Messages.
+
+Added ability to shutdown SimpleServer cleanly.
+
+Release 0.2 - 04/16/2004
+
+Added .chm API Documentation to binary release.
+
+Fixed bug parsing email addresses in SmtpServer.
+
+Fixed SimpleServer to listen on all IP addresses instead of just the loopback address.
+
+Release 0.1 - 11/12/2003
+
+Initial Release of SMTP Server component (cses.smtp.server.dll)

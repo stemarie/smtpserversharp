@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+
+<!--
+   | Build file for the C# Email Server project
+ -->
+<project name="cses" default="build" basedir=".">
+
+    <description>C# Email Server build file</description>
+    
+    <!--
+       | Properties/Setup Targets
+     -->
+    
+    <!-- 
+       | The Root for the build directory.  The release type
+       | (debug/release) will be appended to create a the build.dir
+       | property.
+     -->
+    <property name="build.root.dir" value="build" />
+    
+    <!-- Version -->
+    <property name="build.version" value="0.3" />
+    
+    <!-- 
+       | Initializes the properties.  Defaults to DEBUG
+       | unless the release target was already called
+     -->
+    <target name="init">
+        <property name="initialized" value="false" />
+        <if propertyexists="project.config">
+            <property name="initialized" value="true" />
+        </if>
+        <call target="init.debug" unless="${initialized}" />
+        
+        <echo message="Building a ${project.config} build." />
+        
+        <property name="build.dir" value="${build.root.dir}/${project.config}" />        
+    </target>
+
+    <!-- Configures a DEBUG build -->
+    <target name="init.debug" description="Forces a DEBUG build.">
+        <property name="project.config" value="debug" />
+        <property name="build.debug" value="true" />        
+        <property name="build.release" value="false" />
+    </target>
+
+    <!-- Configures a RELEASE build -->
+    <target name="init.release" description="Forces a RELEASE build.">
+        <property name="project.config" value="release" />
+        <property name="build.debug" value="false" />
+        <property name="build.release" value="true" />
+    </target>
+
+    <!--
+       | Build Targets
+     -->
+
+    <target name="build" depends="build.smtpserver" />
+
+    <!--
+       | Builds the SMTP Server DLL
+     -->
+    <target name="build.smtpserver" depends="init">
+        <mkdir dir="${build.dir}" />
+        <csc 
+            target="library"
+            output="${build.dir}/cses.smtp.server.dll" debug="${build.debug}"
+            doc="${build.dir}/cses.smtp.server.xml"
+            optimize="${build.release}">
+            <sources>
+                <includes name="src/**/*.cs" />
+            </sources>
+            <references>
+                <includes name="lib/log4net.dll" />
+            </references>
+        </csc>
+    </target>
+    
+    <target name="build.smtpserver.test" depends="init, build.smtpserver">
+        <mkdir dir="${build.dir}" />
+        <csc 
+            target="library"
+            output="${build.dir}/cses.smtp.server-test.dll" debug="${build.debug}">
+            <sources>
+                <includes name="src-test/**/*.cs" />
+            </sources>
+            <references>
+                <includes name="${build.dir}/cses.smtp.server.dll" />
+                <includes name="lib/log4net.dll" />
+                <includes name="lib/nunit.framework.dll" />
+            </references>
+        </csc>
+        <!-- Copy the references into the build directory -->
+        <copy todir="${build.dir}">
+            <fileset basedir="lib">
+                <includes name="log4net.dll" />
+            </fileset>
+        </copy>
+    </target>
+    
+    <!--
+       | Documentation Targets
+     -->
+     
+     <target name="doc" depends="init">
+        <ndoc>
+            <assemblies basedir="${build.dir}">
+                <includes name="cses.smtp.server.dll" />
+            </assemblies>
+            <summaries basedir="${build.dir}">
+                <includes name="C:\dev\mailserver\cses\NamespaceSummary.xml" />
+            </summaries>
+                <documenters>
+                    <documenter name="MSDN">
+                        <property name="OutputDirectory" value="${build.dir}\doc" />
+                        <property name="HtmlHelpName" value="CSES Documentation" />
+                        <property name="HtmlHelpCompilerFilename" value="hhc.exe" />
+                        <property name="IncludeFavorites" value="False" />
+                        <property name="Title" value="C# Email Server API Documentation" />
+                        <property name="SplitTOCs" value="False" />
+                        <property name="DefaulTOC" value="" />
+                        <property name="ShowVisualBasic" value="True" />
+                        <property name="ShowMissingSummaries" value="True" />
+                        <property name="ShowMissingRemarks" value="True" />
+                        <property name="ShowMissingParams" value="True" />
+                        <property name="ShowMissingReturns" value="True" />
+                        <property name="ShowMissingValues" value="True" />
+                        <property name="DocumentInternals" value="False" />
+                        <property name="DocumentProtected" value="True" />
+                        <property name="DocumentPrivates" value="False" />
+                        <property name="DocumentEmptyNamespaces" value="False" />
+                        <property name="IncludeAssemblyVersion" value="False" />
+                        <property name="CopyrightText" value="Eric Daugherty" />
+                        <property name="CopyrightHref" value="http://www.ericdaugherty.com/dev/cses" />
+                     </documenter>
+                </documenters> 
+         </ndoc>
+    </target>
+           
+    
+    
+    <!-- 
+       | Release Targets
+     -->
+    
+    <target name="release" depends="clean, init.release, init, build.smtpserver, doc">
+        <copy todir="${build.dir}">
+            <fileset basedir="lib">
+                <includes name="log4net.dll" />
+            </fileset>
+        </copy>
+        <copy todir="${build.dir}">
+            <fileset basedir="docs">
+                <includes name="LICENSE.txt" />
+                <includes name="ReleaseNotes.txt" />
+            </fileset>
+        </copy>
+        <copy todir="${build.dir}">
+            <fileset basedir="${build.dir}\doc">
+                <includes name="CSES Documentation.chm" />
+            </fileset>
+        </copy>       
+        <zip zipfile="${build.root.dir}/${nant.project.name}-${build.version}.zip">
+            <fileset basedir="${build.dir}">
+                <includes name="*"/>                
+            </fileset>
+        </zip>
+        <zip zipfile="${build.root.dir}/${nant.project.name}-${build.version}-src.zip">
+            <fileset basedir="">
+                <includes name="lib/**/*" />
+                <includes name="docs/**/*" />
+                <includes name="src/**/*" />
+                <includes name="src-test/**/*" />
+                <includes name="cses.build" />
+            </fileset>
+        </zip>
+    </target>
+        
+    <!--
+       | Clean Targets
+     -->
+     
+    <target name="clean">
+        <delete dir="${build.root.dir}" />
+    </target>
+
+    <!--
+       | Test Targets
+     -->
+    
+    <target name="test" depends="test.smtpserver" />
+    
+    <target name="test.smtpserver" depends="init, build.smtpserver.test">
+        <nunit2>
+            <formatter type="Plain" />
+            <test assemblyname="${build.dir}/cses.smtp.server-test.dll" />
+        </nunit2>
+    </target>
+  
+</project>
