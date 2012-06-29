@@ -472,7 +472,7 @@ namespace src.SmtpServer
                                         context.ConnectionId, address));
                         }
                     }
-                    catch (InvalidEmailAddressException)
+                    catch (FormatException)
                     {
                         if (log.IsDebugEnabled)
                             log.Debug(
