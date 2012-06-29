@@ -1,14 +1,7 @@
-using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using log4net;
-using log4net.Config;
 using NUnit.Framework;
 using src.SmtpServer;
 
-namespace EricDaugherty.CSES.SmtpServer
+namespace src_test.SmtpServer
 {
 		
 	[TestFixture]

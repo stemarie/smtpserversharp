@@ -1,11 +1,9 @@
 using src.Common;
+using NUnit.Framework;
 
-namespace EricDaugherty.CSES.Common
+namespace src_test.Common
 {
-	using System;
-	using NUnit.Framework;
-	
-	/// <summary>
+    /// <summary>
 	/// Test cases for the EmailAddress class.  These tests
 	/// also covers the InvalidEmailAddressException class.
 	/// </summary>

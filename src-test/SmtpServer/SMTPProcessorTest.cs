@@ -8,7 +8,7 @@ using log4net.Config;
 using NUnit.Framework;
 using src.SmtpServer;
 
-namespace EricDaugherty.CSES.SmtpServer
+namespace src_test.SmtpServer
 {
 
 	[TestFixture]

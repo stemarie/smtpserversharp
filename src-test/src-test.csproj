@@ -50,9 +50,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EricDaugherty\CSES\Common\EmailAddressTest.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPMessageTest.cs" />
-    <Compile Include="EricDaugherty\CSES\SmtpServer\SMTPProcessorTest.cs" />
+    <Compile Include="Common\EmailAddressTest.cs" />
+    <Compile Include="SmtpServer\SMTPMessageTest.cs" />
+    <Compile Include="SmtpServer\SMTPProcessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
