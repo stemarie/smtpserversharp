@@ -9,7 +9,7 @@ namespace src.SmtpServer
 	{
 		#region Variables
 		
-		private Queue queue;
+		private readonly Queue queue;
 		
 		#endregion
 		

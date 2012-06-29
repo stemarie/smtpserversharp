@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  <data name="Exception_Username_must_be_at_least_one_charecter">
+    <value xml:space="preserve">Invalid username. Username must be at least one charecter</value>
+  </data>
+  <data name="Exception_Domain_must_be_at_least_5_charecters__a_com__a_edu__etc">
+    <value xml:space="preserve">Invalid domain. Domain must be at least 5 characters (a.com, a.edu, etc...)</value>
+  </data>
+  <data name="Exception_Invalid_address_Specified_address_is_empty">
+    <value xml:space="preserve">Invalid address. Specified address is empty</value>
+  </data>
+  <data name="Exception_Invalid_address_The_address_must_be_formatted_as_username_domain">
+    <value xml:space="preserve">Invalid address. The address must be formatted as: username@domain.</value>
+  </data>
+  <data name="Exception_Invalid_address_The_username_and_domain_address_parts_can_not_contain_any_of_the_following_characters">
+    <value xml:space="preserve">Invalid address. The username and domain address parts can not contain any of the following characters: ( ) &lt; &gt; @ , ; : \ " . [ ]</value>
+  </data>
+  <data name="Log_FileSpool_directory_does_not_exist_Attempting_to_create">
+    <value xml:space="preserve">FileSpool directory does not exist. Attempting to create...</value>
+  </data>
+  <data name="Log_Error_creating_FileSpool_directory_0_Exception_1">
+    <value xml:space="preserve">Error creating FileSpool directory: {0}. Exception {1}</value>
+  </data>
+  <data name="Log_Connection_0_New_connection_from_client_1">
+    <value xml:space="preserve">Connection {0}: New connection from client {1}</value>
+  </data>
+  <data name="Log_Connection_0_Wrote_Line_1">
+    <value xml:space="preserve">Connection {0}: Wrote Line: {1}</value>
+  </data>
+  <data name="Log_Socket_closed_before_end_of_line_received">
+    <value xml:space="preserve">Socket closed before end of line received.</value>
+  </data>
+  <data name="Log_Connection_0_Read_1">
+    <value xml:space="preserve">Connection {0}: Read: {1}</value>
+  </data>
+  <data name="Log_Connection_0_Reset">
+    <value xml:space="preserve">Connection {0}: Reset</value>
+  </data>
+  <data name="Log_Connection_0_Read_Line_1">
+    <value xml:space="preserve">Connection {0}: Read Line: {1}</value>
+  </data>
+  <data name="Protocol_220_0_Welcome_to_Eric_Daugherty_s_C_SMTP_Server">
+    <value xml:space="preserve">220 {0} Welcome to Eric Daugherty's C# SMTP Server.</value>
+  </data>
+  <data name="Protocol_MESSAGE_DEFAULT_HELO_RESPONSE_250_0">
+    <value xml:space="preserve">250 {0}</value>
+  </data>
+  <data name="Protocol_MESSAGE_OK_250_OK">
+    <value xml:space="preserve">250 OK</value>
+  </data>
+  <data name="Protocol_MESSAGE_START_DATA__354_Start_mail_input_end_with_CRLF_CRLF">
+    <value xml:space="preserve">354 Start mail input; end with &lt;CRLF&gt;.&lt;CRLF&gt;</value>
+  </data>
+  <data name="Protocol_MESSAGE_GOODBYE_221_Goodbye">
+    <value xml:space="preserve">221 Goodbye.</value>
+  </data>
+  <data name="Protocol_MESSAGE_UNKNOWN_COMMAND_500_Command_Unrecognized">
+    <value xml:space="preserve">500 Command Unrecognized.</value>
+  </data>
+  <data name="Protocol_MESSAGE_INVALID_COMMAND_ORDER_503_Command_not_allowed_here">
+    <value xml:space="preserve">503 Command not allowed here.</value>
+  </data>
+  <data name="Protocol_MESSAGE_INVALID_ARGUMENT_COUNT__501_Incorrect_number_of_arguments">
+    <value xml:space="preserve">501 Incorrect number of arguments.</value>
+  </data>
+  <data name="Protocol_MESSAGE_INVALID_ADDRESS_451_Address_is_invalid">
+    <value xml:space="preserve">451 Address is invalid.</value>
+  </data>
+  <data name="Protocol_MESSAGE_UNKNOWN_USER_550_User_does_not_exist">
+    <value xml:space="preserve">550 User does not exist.</value>
+  </data>
+  <data name="Protocol_MESSAGE_SYSTEM_ERROR_554_Transaction_failed">
+    <value xml:space="preserve">554 Transaction failed.</value>
+  </data>
+  <data name="Log_ProcessConnection_Connection_0_Error_1">
+    <value xml:space="preserve">Connection {0}: Error: {1}</value>
+  </data>
+  <data name="Log_ProcessCommands_ProcessCommands_Read_0">
+    <value xml:space="preserve">ProcessCommands Read: {0}</value>
+  </data>
+  <data name="Log_ProcessCommands_Connection_0_Exception_occured_while_processing_commands_1">
+    <value xml:space="preserve">Connection {0}: Exception occured while processing commands: {1}</value>
+  </data>
+  <data name="Log_Mail_Connection_0_MailFrom_address_1_accepted">
+    <value xml:space="preserve">Connection {0}: MailFrom address: {1} accepted.</value>
+  </data>
+  <data name="Log_Connection_0_MailFrom_argument_1_rejected_Should_be_from_username_domain_com">
+    <value xml:space="preserve">Connection {0}: MailFrom argument: {1} rejected.  Should be from:&lt;username@domain.com&gt;</value>
+  </data>
+  <data name="Log_Connection_0_RcptTo_address_1_accepted">
+    <value xml:space="preserve">Connection {0}: RcptTo address: {1} accepted.</value>
+  </data>
+  <data name="Log_Connection_0_RcptTo_address_1_rejected_Did_not_pass_Address_Filter">
+    <value xml:space="preserve">Connection {0}: RcptTo address: {1} rejected.  Did not pass Address Filter.</value>
+  </data>
+  <data name="Log_Connection_0_RcptTo_argument_1_rejected_Should_be_from_username_domain_com">
+    <value xml:space="preserve">Connection {0}: RcptTo argument: {1} rejected.  Should be from:&lt;username@domain.com&gt;</value>
+  </data>
+  <data name="EMAIL_Received_from_0_0_1">
+    <value xml:space="preserve">Received: from {0} ({0} [{1}])</value>
+  </data>
+  <data name="EMAIL_by_0_Eric_Daugherty_s_C_Email_Server">
+    <value xml:space="preserve">     by {0} (Eric Daugherty's C# Email Server)</value>
+  </data>
+</root>

@@ -10,7 +10,7 @@ namespace src.SmtpServer
 		
 		#region Variables
 		
-		private string domain;
+		private readonly string domain;
 		
 		#endregion
 		

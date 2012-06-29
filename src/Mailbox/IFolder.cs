@@ -35,7 +35,5 @@ namespace src.Mailbox
 		void addMessage( EmailAddress fromAddress, string data );
 
 		#endregion
-
-		
 	}
 }

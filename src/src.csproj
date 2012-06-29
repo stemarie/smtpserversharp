@@ -51,7 +51,14 @@
     <Compile Include="Common\InvalidEmailAddressException.cs" />
     <Compile Include="Mailbox\IFolder.cs" />
     <Compile Include="Mailbox\MailboxManager.cs" />
+    <Compile Include="Net\ConnectionProcessor.cs" />
+    <Compile Include="Net\ConnectionWrapper.cs" />
     <Compile Include="Net\SimpleServer.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SmtpSender\SMTPSender.cs" />
     <Compile Include="SmtpServer\FileSpool\FileMessageSpool.cs" />
     <Compile Include="SmtpServer\IMessageSpool.cs" />
@@ -64,7 +71,12 @@
     <Compile Include="SmtpServer\SMTPProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

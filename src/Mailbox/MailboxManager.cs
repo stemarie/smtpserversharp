@@ -9,7 +9,6 @@ namespace src.Mailbox
 	/// </remarks>
 	public class MailboxManager
 	{
-
 		#region Constructors
 
 		/// <summary>
