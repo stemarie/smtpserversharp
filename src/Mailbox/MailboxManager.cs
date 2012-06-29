@@ -1,30 +1,30 @@
 namespace src.Mailbox
 {
-	/// <summary>
-	/// Mailbox Manager is a singleton class that provides
-	/// access to the current mailbox implementation.
-	/// </summary>
-	/// <remarks>
-	/// Incomplete.
-	/// </remarks>
-	public class MailboxManager
-	{
-		#region Constructors
+    /// <summary>
+    /// Mailbox Manager is a singleton class that provides
+    /// access to the current mailbox implementation.
+    /// </summary>
+    /// <remarks>
+    /// Incomplete.
+    /// </remarks>
+    public class MailboxManager
+    {
+        #region Constructors
 
-		/// <summary>
-		/// Private constructor used by the GetInstance method to
-		/// create the one and only singleton instance.
-		/// </summary>
-		private MailboxManager()
-		{			
-		}
+        /// <summary>
+        /// Private constructor used by the GetInstance method to
+        /// create the one and only singleton instance.
+        /// </summary>
+        private MailboxManager()
+        {
+        }
 
-		#endregion
+        #endregion
 
-		#region Static Methods
+        #region Static Methods
 
-//		public static MailboxManager GetInstance();
+        //		public static MailboxManager GetInstance();
 
-		#endregion
-	}
+        #endregion
+    }
 }

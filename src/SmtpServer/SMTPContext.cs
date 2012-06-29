@@ -13,7 +13,7 @@ namespace src.SmtpServer
     /// This class is similar to a HTTP Session.  It is used to maintain all
     /// the state information about the current connection.
     /// </remarks>
-    public class SMTPContext : object
+    public class SMTPContext : IDisposable
     {
         #region Constants
 
@@ -24,10 +24,10 @@ namespace src.SmtpServer
         #region Variables
 
         /// <summary>Default Logger</summary>
-        private static readonly ILog log = LogManager.GetLogger(typeof (SMTPContext));
+        private static readonly ILog log = LogManager.GetLogger(typeof(SMTPContext));
 
         /// <summary>Logs all IO.  Seperate from normal Logger.</summary>
-        private static readonly ILog ioLog = LogManager.GetLogger("IO." + typeof (SMTPContext));
+        private static readonly ILog ioLog = LogManager.GetLogger("IO." + typeof(SMTPContext));
 
         /// <summary>The unique ID assigned to this connection</summary>
         private readonly long connectionId;
@@ -62,8 +62,11 @@ namespace src.SmtpServer
         public SMTPContext(long connectionId, Socket socket)
         {
             if (log.IsDebugEnabled)
-                log.Debug(String.Format(Resources.Log_Connection_0_New_connection_from_client_1, connectionId,
-                                        socket.RemoteEndPoint));
+                log.Debug(
+                    String.Format(
+                        Resources.Log_Connection_0_New_connection_from_client_1,
+                        connectionId,
+                        socket.RemoteEndPoint));
 
             this.connectionId = connectionId;
             lastCommand = -1;
@@ -222,5 +225,14 @@ namespace src.SmtpServer
         }
 
         #endregion
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <filterpriority>2</filterpriority>
+        public void Dispose()
+        {
+            socket.Dispose();
+        }
     }
 }

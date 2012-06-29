@@ -123,7 +123,7 @@ namespace src.Common
         {
             get
             {
-                return username + "@" + domain;
+                return string.Format("{0}@{1}", username, domain);
             }
             set
             {

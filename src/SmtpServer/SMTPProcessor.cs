@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -16,7 +17,7 @@ namespace src.SmtpServer
     /// <remarks>
     /// 	Created by: Eric Daugherty
     /// </remarks>
-    public class SMTPProcessor
+    public class SMTPProcessor : IDisposable
     {
         #region Constants
 
@@ -41,7 +42,7 @@ namespace src.SmtpServer
 
         /// <summary>DATA Comand</summary>
         public const int COMMAND_DATA = 6;
-        
+
         // Regular Expressions
         private static readonly Regex ADDRESS_REGEX = new Regex("<.+@.+>", RegexOptions.IgnoreCase);
 
@@ -176,16 +177,16 @@ namespace src.SmtpServer
         /// <summary>
         /// Provides common initialization logic for the constructors.
         /// </summary>
-        private void Initialize(string domain)
+        private void Initialize(string emailDomain)
         {
             // Initialize the connectionId counter
             connectionId = 1;
 
-            this.domain = domain;
+            domain = emailDomain;
 
             // Initialize default messages
-            welcomeMessage = String.Format(Resources.Protocol_220_0_Welcome_to_Eric_Daugherty_s_C_SMTP_Server, domain);
-            heloResponse = String.Format(Resources.Protocol_MESSAGE_DEFAULT_HELO_RESPONSE_250_0, domain);
+            welcomeMessage = String.Format(Resources.Protocol_220_0_Welcome_to_Eric_Daugherty_s_C_SMTP_Server, emailDomain);
+            heloResponse = String.Format(Resources.Protocol_MESSAGE_DEFAULT_HELO_RESPONSE_250_0, emailDomain);
         }
 
         #endregion
@@ -238,17 +239,23 @@ namespace src.SmtpServer
                 currentConnectionId = connectionId++;
             }
 
-            var context = new SMTPContext(currentConnectionId, socket);
-
-            try
+            using (SMTPContext context = new SMTPContext(currentConnectionId, socket))
             {
-                SendWelcomeMessage(context);
+                try
+                {
+                    SendWelcomeMessage(context);
 
-                ProcessCommands(context);
-            }
-            catch (Exception exception)
-            {
-                log.Error(String.Format(Resources.Log_ProcessConnection_Connection_0_Error_1, context.ConnectionId, exception), exception);
+                    ProcessCommands(context);
+                }
+                catch (Exception exception)
+                {
+                    log.Error(
+                        String.Format(
+                            Resources.Log_ProcessConnection_Connection_0_Error_1,
+                            context.ConnectionId,
+                            exception),
+                        exception);
+                }
             }
         }
 
@@ -342,11 +349,11 @@ namespace src.SmtpServer
         /// <summary>
         /// Handles the HELO command.
         /// </summary>
-        private void Helo(SMTPContext context, String[] inputs)
+        private void Helo(SMTPContext context, IList<string> inputs)
         {
             if (context.LastCommand == -1)
             {
-                if (inputs.Length == 2)
+                if (inputs.Count == 2)
                 {
                     context.ClientDomain = inputs[1];
                     context.LastCommand = COMMAND_HELO;
@@ -366,7 +373,7 @@ namespace src.SmtpServer
         /// <summary>
         /// Reset the connection state.
         /// </summary>
-        private void Rset(SMTPContext context)
+        private static void Rset(SMTPContext context)
         {
             if (context.LastCommand != -1)
             {
@@ -383,7 +390,7 @@ namespace src.SmtpServer
         /// <summary>
         /// Handle the MAIL FROM:&lt;address&gt; command.
         /// </summary>
-        private void Mail(SMTPContext context, string argument)
+        private static void Mail(SMTPContext context, string argument)
         {
             bool addressValid = false;
             if (context.LastCommand == COMMAND_HELO)
@@ -526,7 +533,7 @@ namespace src.SmtpServer
         /// Parses a valid email address out of the input string and return it.
         /// Null is returned if no address is found.
         /// </summary>
-        private string ParseAddress(string input)
+        private static string ParseAddress(string input)
         {
             Match match = ADDRESS_REGEX.Match(input);
             if (match.Success)
@@ -544,5 +551,14 @@ namespace src.SmtpServer
         }
 
         #endregion
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <filterpriority>2</filterpriority>
+        public void Dispose()
+        {
+            messageSpool.Dispose();
+        }
     }
 }

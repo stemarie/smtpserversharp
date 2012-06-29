@@ -1,3 +1,4 @@
+using System;
 using System.Net.Sockets;
 
 namespace src.Net
@@ -6,7 +7,7 @@ namespace src.Net
     /// Wraps the ConnectionProcessor and Socket to allow a new thread to be
     /// started that kicks off the ConnectionProcessor's process( Socket) method.
     /// </summary>
-    public class ConnectionWrapper
+    public class ConnectionWrapper : IDisposable
     {
         private readonly ConnectionProcessor processor;
         private readonly Socket socket;
@@ -28,6 +29,15 @@ namespace src.Net
         public void Start()
         {
             processor(socket);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <filterpriority>2</filterpriority>
+        public void Dispose()
+        {
+            socket.Dispose();
         }
     }
 }

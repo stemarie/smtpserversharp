@@ -20,7 +20,7 @@ namespace src.Net
     {
         #region Variables
 
-        private static ILog log = LogManager.GetLogger(typeof (SimpleServer));
+        private static ILog log = LogManager.GetLogger(typeof(SimpleServer));
         private readonly int port;
         private readonly ConnectionProcessor processor;
         private bool isRunning;
@@ -63,8 +63,10 @@ namespace src.Net
                 try
                 {
                     Socket socket = listener.AcceptSocket();
-                    var handler = new ConnectionWrapper(processor, socket);
-                    new Thread(handler.Start).Start();
+                    using (var handler = new ConnectionWrapper(processor, socket))
+                    {
+                        new Thread(handler.Start).Start();
+                    }
                 }
                 catch
                 {

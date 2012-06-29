@@ -14,7 +14,7 @@ namespace src.SmtpSender
     {
         #region Variables
 
-        private static ILog log = LogManager.GetLogger(typeof (SMTPSender));
+        private static ILog log = LogManager.GetLogger(typeof(SMTPSender));
 
         #endregion
 
@@ -38,8 +38,7 @@ namespace src.SmtpSender
         /// The raw message data.
         /// </param>
         public void DeliverMessage(string domain, EmailAddress[] addresses, string data)
-        {
-        }
+        { }
 
         #endregion
 
@@ -47,7 +46,7 @@ namespace src.SmtpSender
 
         private void Deliver(string domain)
         {
-//			Dns.r
+            //			Dns.r
         }
 
         #endregion

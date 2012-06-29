@@ -63,7 +63,7 @@ namespace src.SmtpServer
         /// </summary>
         public EmailAddress[] ToAddresses
         {
-            get { return (EmailAddress[]) recipientAddresses.ToArray(typeof (EmailAddress)); }
+            get { return (EmailAddress[])recipientAddresses.ToArray(typeof(EmailAddress)); }
         }
 
         /// <summary>Message data.</summary>
@@ -133,7 +133,7 @@ namespace src.SmtpServer
         private SMTPMessagePart[] parseMessageParts()
         {
             string message = data.ToString();
-            var contentType = (string) Headers["Content-Type"];
+            var contentType = (string)Headers["Content-Type"];
 
             // Check to see if it is a Multipart Messages
             if (contentType != null && Regex.Match(contentType, "multipart/mixed", RegexOptions.IgnoreCase).Success)
@@ -161,11 +161,9 @@ namespace src.SmtpServer
                             string messagePartText = message.Substring(lastIndex, currentIndex - lastIndex);
                             messageParts.Add(new SMTPMessagePart(messagePartText));
                         }
-
                         lastIndex = currentIndex + matchLength;
                     }
-
-                    return (SMTPMessagePart[]) messageParts.ToArray(typeof (SMTPMessagePart));
+                    return (SMTPMessagePart[])messageParts.ToArray(typeof(SMTPMessagePart));
                 }
             }
             return new SMTPMessagePart[0];
