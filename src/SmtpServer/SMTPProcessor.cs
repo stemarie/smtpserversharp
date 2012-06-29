@@ -6,7 +6,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using log4net;
-using src.Common;
 using src.Properties;
 
 namespace src.SmtpServer
@@ -472,7 +471,7 @@ namespace src.SmtpServer
                                         context.ConnectionId, address));
                         }
                     }
-                    catch (InvalidEmailAddressException)
+                    catch (FormatException)
                     {
                         if (log.IsDebugEnabled)
                             log.Debug(
