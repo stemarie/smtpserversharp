@@ -20,10 +20,9 @@ namespace src.SmtpServer
 
         #region Variables
 
-        private readonly StringBuilder data;
-        private readonly List<MailAddress> recipientAddresses;
-
-        private Hashtable headerFields;
+        private readonly StringBuilder _data;
+        private readonly List<MailAddress> _recipientAddresses;
+        private Hashtable _headerFields;
 
         #endregion
 
@@ -34,13 +33,13 @@ namespace src.SmtpServer
         /// </summary>
         public SMTPMessage()
         {
-            recipientAddresses = new List<MailAddress>();
-            data = new StringBuilder();
+            _recipientAddresses = new List<MailAddress>();
+            _data = new StringBuilder();
         }
 
         #endregion
 
-        #region Properies
+        #region Properties
 
         /// <summary>
         /// A hash table of all the Headers in the email message.  They keys
@@ -49,7 +48,7 @@ namespace src.SmtpServer
         /// </summary>
         public Hashtable Headers
         {
-            get { return headerFields ?? (headerFields = ParseHeaders(data.ToString())); }
+            get { return _headerFields ?? (_headerFields = ParseHeaders(_data.ToString())); }
         }
 
         /// <summary>
@@ -64,13 +63,13 @@ namespace src.SmtpServer
         /// </summary>
         public MailAddress[] ToAddresses
         {
-            get { return recipientAddresses.ToArray(); }
+            get { return _recipientAddresses.ToArray(); }
         }
 
         /// <summary>Message data.</summary>
         public string Data
         {
-            get { return data.ToString(); }
+            get { return _data.ToString(); }
         }
 
         /// <summary>
@@ -85,13 +84,13 @@ namespace src.SmtpServer
         /// <summary>Addes an address to the recipient list.</summary>
         public void AddToAddress(MailAddress address)
         {
-            recipientAddresses.Add(address);
+            _recipientAddresses.Add(address);
         }
 
         /// <summary>Append data to message data.</summary>
         public void AddData(String data)
         {
-            this.data.Append(data);
+            this._data.Append(data);
         }
 
         #endregion
@@ -133,7 +132,7 @@ namespace src.SmtpServer
 
         private SMTPMessagePart[] parseMessageParts()
         {
-            string message = data.ToString();
+            string message = _data.ToString();
             var contentType = (string)Headers["Content-Type"];
 
             // Check to see if it is a Multipart Messages

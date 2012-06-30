@@ -57,7 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SmtpSender\SMTPSender.cs" />
+    <Compile Include="SmtpSender\ISMTPSender.cs" />
     <Compile Include="SmtpServer\FileSpool\FileMessageSpool.cs" />
     <Compile Include="SmtpServer\IMessageSpool.cs" />
     <Compile Include="SmtpServer\IRecipientFilter.cs" />
