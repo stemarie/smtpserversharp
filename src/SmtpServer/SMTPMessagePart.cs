@@ -11,15 +11,15 @@ namespace src.SmtpServer
     {
         #region Constants
 
-        private static readonly string DOUBLE_NEWLINE = Environment.NewLine + Environment.NewLine;
+        private static readonly string doubleNewline = Environment.NewLine + Environment.NewLine;
 
         #endregion
 
         #region Variables
 
-        private readonly string bodyData = String.Empty;
-        private readonly string headerData = String.Empty;
-        private Hashtable headerFields;
+        private readonly string _bodyData = String.Empty;
+        private readonly string _headerData = String.Empty;
+        private Hashtable _headerFields;
 
         #endregion
 
@@ -32,10 +32,10 @@ namespace src.SmtpServer
         /// </summary>
         public SMTPMessagePart(string data)
         {
-            string[] parts = Regex.Split(data, DOUBLE_NEWLINE);
+            string[] parts = Regex.Split(data, doubleNewline);
 
-            headerData = parts[0] + DOUBLE_NEWLINE;
-            bodyData = parts[1] + DOUBLE_NEWLINE;
+            _headerData = parts[0] + doubleNewline;
+            _bodyData = parts[1] + doubleNewline;
         }
 
         #endregion
@@ -49,7 +49,7 @@ namespace src.SmtpServer
         /// </summary>
         public Hashtable Headers
         {
-            get { return headerFields ?? (headerFields = SMTPMessage.ParseHeaders(headerData)); }
+            get { return _headerFields ?? (_headerFields = SMTPMessage.ParseHeaders(_headerData)); }
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace src.SmtpServer
         /// </summary>
         public string HeaderData
         {
-            get { return headerData; }
+            get { return _headerData; }
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace src.SmtpServer
         /// </summary>
         public string BodyData
         {
-            get { return bodyData; }
+            get { return _bodyData; }
         }
 
         #endregion

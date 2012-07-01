@@ -23,6 +23,11 @@ namespace src.Mailbox
         /// </summary>
         long Size { get; }
 
+        /// <summary>
+        /// The name of the folder
+        /// </summary>
+        string Name { get; }
+
         #endregion
 
         #region Methods
@@ -32,7 +37,7 @@ namespace src.Mailbox
         /// </summary>
         /// <param name="fromAddress">The FROM address for the email.</param>
         /// <param name="data">The raw message data.</param>
-        void addMessage(MailAddress fromAddress, string data);
+        void AddMessage(MailAddress fromAddress, string data);
 
         #endregion
     }

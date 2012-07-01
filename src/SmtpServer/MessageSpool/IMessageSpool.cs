@@ -1,6 +1,6 @@
 using System;
 
-namespace src.SmtpServer
+namespace src.SmtpServer.MessageSpool
 {
     /// <summary>
     /// Provides an interface for the SMTPProcessor to use
@@ -22,5 +22,11 @@ namespace src.SmtpServer
         /// the message is considered delivered.
         /// </summary>		
         bool SpoolMessage(SMTPMessage message);
+
+        /// <summary>Returns the oldest message in the spool.</summary>
+        SMTPMessage NextMessage();
+
+        /// <summary>Removes any messages from the spool.</summary>
+        void ClearSpool();
     }
 }

@@ -9,21 +9,17 @@ namespace src.Mailbox
     /// </remarks>
     public class MailboxManager
     {
+        private static readonly IManager instance = new Manager();
+
+        public static IManager Instance { get { return instance; } }
+
         #region Constructors
 
         /// <summary>
-        /// Private constructor used by the GetInstance method to
-        /// create the one and only singleton instance.
+        /// Private constructor - Can't directly make an instance
         /// </summary>
         private MailboxManager()
-        {
-        }
-
-        #endregion
-
-        #region Static Methods
-
-        //		public static MailboxManager GetInstance();
+        { }
 
         #endregion
     }

@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 
-namespace src.SmtpServer
+namespace src.SmtpServer.MessageSpool.Memory
 {
     /// <summary>
     /// Provides a memory based IMessageSpool.
@@ -9,7 +9,7 @@ namespace src.SmtpServer
     {
         #region Variables
 
-        private readonly Queue<SMTPMessage> queue;
+        private ConcurrentQueue<SMTPMessage> _queue;
 
         #endregion
 
@@ -18,18 +18,18 @@ namespace src.SmtpServer
         /// </summary>
         public MemoryMessageSpool()
         {
-            queue = new Queue<SMTPMessage>();
+            _queue = new ConcurrentQueue<SMTPMessage>();
         }
 
         #region IMessageSpool methods
 
         /// <summary>
-        /// Addes the message to the in memory queue.
+        /// Adds the message to the in memory queue.
         /// </summary>
         /// <param name='message'>The message to queue.</param>
         public virtual bool SpoolMessage(SMTPMessage message)
         {
-            queue.Enqueue(message);
+            _queue.Enqueue(message);
             return true;
         }
 
@@ -40,13 +40,14 @@ namespace src.SmtpServer
         /// <summary>Returns the oldest message in the spool.</summary>
         public virtual SMTPMessage NextMessage()
         {
-            return queue.Dequeue();
+            SMTPMessage message;
+            return _queue.TryDequeue(out message) ? message : null;
         }
 
         /// <summary>Removes any messages from the spool.</summary>
         public virtual void ClearSpool()
         {
-            queue.Clear();
+            _queue = new ConcurrentQueue<SMTPMessage>();
         }
 
         #endregion

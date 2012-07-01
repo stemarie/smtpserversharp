@@ -48,7 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mailbox\IFolder.cs" />
+    <Compile Include="Mailbox\IMailbox.cs" />
+    <Compile Include="Mailbox\IManager.cs" />
+    <Compile Include="Mailbox\Mailbox.cs" />
     <Compile Include="Mailbox\MailboxManager.cs" />
+    <Compile Include="Mailbox\Manager.cs" />
+    <Compile Include="Mailbox\Storage\IFolderStorage.cs" />
+    <Compile Include="Mailbox\Storage\IMailboxStorage.cs" />
     <Compile Include="Net\ConnectionProcessor.cs" />
     <Compile Include="Net\ConnectionWrapper.cs" />
     <Compile Include="Net\SimpleServer.cs" />
@@ -58,16 +64,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SmtpSender\ISMTPSender.cs" />
-    <Compile Include="SmtpServer\FileSpool\FileMessageSpool.cs" />
-    <Compile Include="SmtpServer\IMessageSpool.cs" />
-    <Compile Include="SmtpServer\IRecipientFilter.cs" />
-    <Compile Include="SmtpServer\LocalRecipientFilter.cs" />
-    <Compile Include="SmtpServer\MemoryMessageSpool.cs" />
+    <Compile Include="SmtpServer\MessageSpool\IMessageSpool.cs" />
+    <Compile Include="SmtpServer\RecipientFilter\IRecipientFilter.cs" />
+    <Compile Include="SmtpServer\RecipientFilter\Local\LocalRecipientFilter.cs" />
     <Compile Include="SmtpServer\SMTPContext.cs" />
     <Compile Include="SmtpServer\SMTPMessage.cs" />
     <Compile Include="SmtpServer\SMTPMessagePart.cs" />
     <Compile Include="SmtpServer\SMTPProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -78,5 +83,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

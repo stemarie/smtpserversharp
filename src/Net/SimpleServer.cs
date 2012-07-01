@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -20,11 +21,11 @@ namespace src.Net
     {
         #region Variables
 
-        private static ILog log = LogManager.GetLogger(typeof(SimpleServer));
-        private readonly int port;
-        private readonly ConnectionProcessor processor;
-        private bool isRunning;
-        private TcpListener listener;
+        private static readonly ILog log = LogManager.GetLogger(typeof(SimpleServer));
+        private readonly int _port;
+        private readonly ConnectionProcessor _processor;
+        private bool _isRunning;
+        private TcpListener _listener;
 
         #endregion
 
@@ -38,8 +39,8 @@ namespace src.Net
         /// <param name="processor">The ConnectionProcessor that will handle the incoming connections.</param>
         public SimpleServer(int port, ConnectionProcessor processor)
         {
-            this.port = port;
-            this.processor = processor;
+            _port = port;
+            _processor = processor;
         }
 
         #endregion
@@ -52,24 +53,25 @@ namespace src.Net
         /// </summary>
         public void Start()
         {
-            var endPoint = new IPEndPoint(IPAddress.Any, port);
-            listener = new TcpListener(endPoint);
-            listener.Start();
+            var endPoint = new IPEndPoint(IPAddress.Any, _port);
+            _listener = new TcpListener(endPoint);
+            _listener.Start();
 
-            isRunning = true;
+            _isRunning = true;
 
-            while (isRunning)
+            while (_isRunning)
             {
                 try
                 {
-                    Socket socket = listener.AcceptSocket();
-                    using (var handler = new ConnectionWrapper(processor, socket))
+                    Socket socket = _listener.AcceptSocket();
+                    using (var handler = new ConnectionWrapper(_processor, socket))
                     {
                         new Thread(handler.Start).Start();
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    log.Error("Run error", ex);
                 }
             }
         }
@@ -80,10 +82,10 @@ namespace src.Net
         /// </summary>
         public void Stop()
         {
-            isRunning = false;
-            if (listener != null)
+            _isRunning = false;
+            if (_listener != null)
             {
-                listener.Stop();
+                _listener.Stop();
             }
         }
 

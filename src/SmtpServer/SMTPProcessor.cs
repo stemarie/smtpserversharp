@@ -7,6 +7,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using log4net;
 using src.Properties;
+using src.SmtpServer.MessageSpool;
+using src.SmtpServer.RecipientFilter;
+using src.SmtpServer.RecipientFilter.Local;
 
 namespace src.SmtpServer
 {
@@ -23,28 +26,28 @@ namespace src.SmtpServer
 
         // Command codes
         /// <summary>HELO Command</summary>
-        public const int COMMAND_HELO = 0;
+        public const int CommandHelo = 0;
 
         /// <summary>RSET Command</summary>
-        public const int COMMAND_RSET = 1;
+        public const int CommandRset = 1;
 
         /// <summary>NOOP Command</summary>
-        public const int COMMAND_NOOP = 2;
+        public const int CommandNoop = 2;
 
         /// <summary>QUIT Command</summary>
-        public const int COMMAND_QUIT = 3;
+        public const int CommandQuit = 3;
 
         /// <summary>MAIL FROM Command</summary>
-        public const int COMMAND_MAIL = 4;
+        public const int CommandMail = 4;
 
         /// <summary>RCPT TO Command</summary>
-        public const int COMMAND_RCPT = 5;
+        public const int CommandRcpt = 5;
 
         /// <summary>DATA Comand</summary>
-        public const int COMMAND_DATA = 6;
+        public const int CommandData = 6;
 
         // Regular Expressions
-        private static readonly Regex ADDRESS_REGEX = new Regex("<.+@.+>", RegexOptions.IgnoreCase);
+        private static readonly Regex addressRegex = new Regex("<.+@.+>", RegexOptions.IgnoreCase);
 
         #endregion
 
@@ -54,73 +57,29 @@ namespace src.SmtpServer
         private static readonly ILog log = LogManager.GetLogger(typeof(SMTPProcessor));
 
         /// <summary>Incoming Message spool</summary>
-        private readonly IMessageSpool messageSpool;
+        private readonly IMessageSpool _messageSpool;
 
         /// <summary>Determines which recipients to accept for delivery.</summary>
-        private readonly IRecipientFilter recipientFilter;
+        private readonly IRecipientFilter _recipientFilter;
 
         /// <summary>
         /// Every connection will be assigned a unique id to 
         /// provide consistent log output and tracking.
         /// </summary>
-        private long connectionId;
+        private long _connectionId;
 
         /// <summary>Domain name for this server.</summary>
-        private string domain;
+        private string _domain;
 
         /// <summary>The response to the HELO command.</summary>
-        private string heloResponse;
+        private string _heloResponse;
 
         /// <summary>The message to display to the client when they first connect.</summary>
-        private string welcomeMessage;
+        private string _welcomeMessage;
 
         #endregion
 
         #region Constructors
-
-        /// <summary>
-        /// Initializes the SMTPProcessor with the appropriate 
-        /// interface implementations.  This allows the relay and
-        /// delivery behaviour of the SMTPProcessor to be defined
-        /// by the specific server.
-        /// </summary>
-        /// <param name="domain">
-        /// The domain name this server handles mail for.  This does not have to
-        /// be a valid domain name, but it will be included in the Welcome Message
-        /// and HELO response.
-        /// </param>
-        public SMTPProcessor(string domain)
-        {
-            Initialize(domain);
-
-            // Initialize default Interface implementations.
-            recipientFilter = new LocalRecipientFilter(domain);
-            messageSpool = new MemoryMessageSpool();
-        }
-
-        /// <summary>
-        /// Initializes the SMTPProcessor with the appropriate 
-        /// interface implementations.  This allows the relay and
-        /// delivery behaviour of the SMTPProcessor to be defined
-        /// by the specific server.
-        /// </summary>
-        /// <param name="domain">
-        /// The domain name this server handles mail for.  This does not have to
-        /// be a valid domain name, but it will be included in the Welcome Message
-        /// and HELO response.
-        /// </param>
-        /// <param name="recipientFilter">
-        /// The IRecipientFilter implementation is responsible for 
-        /// filtering the recipient addresses to determine which ones
-        /// to accept for delivery.
-        /// </param>
-        public SMTPProcessor(string domain, IRecipientFilter recipientFilter)
-        {
-            Initialize(domain);
-
-            this.recipientFilter = recipientFilter;
-            messageSpool = new MemoryMessageSpool();
-        }
 
         /// <summary>
         /// Initializes the SMTPProcessor with the appropriate 
@@ -142,8 +101,8 @@ namespace src.SmtpServer
         {
             Initialize(domain);
 
-            recipientFilter = new LocalRecipientFilter(domain);
-            this.messageSpool = messageSpool;
+            _recipientFilter = new LocalRecipientFilter(domain);
+            _messageSpool = messageSpool;
         }
 
         /// <summary>
@@ -170,8 +129,8 @@ namespace src.SmtpServer
         {
             Initialize(domain);
 
-            this.recipientFilter = recipientFilter;
-            this.messageSpool = messageSpool;
+            _recipientFilter = recipientFilter;
+            _messageSpool = messageSpool;
         }
 
         /// <summary>
@@ -180,18 +139,14 @@ namespace src.SmtpServer
         private void Initialize(string emailDomain)
         {
             // Initialize the connectionId counter
-            connectionId = 1;
+            _connectionId = 1;
 
-            domain = emailDomain;
+            _domain = emailDomain;
 
             // Initialize default messages
-            welcomeMessage = String.Format(Resources.Protocol_220_0_Welcome_to_Eric_Daugherty_s_C_SMTP_Server, emailDomain);
-            heloResponse = String.Format(Resources.Protocol_MESSAGE_DEFAULT_HELO_RESPONSE_250_0, emailDomain);
+            _welcomeMessage = String.Format(Resources.Protocol_220_0_Welcome_to_Eric_Daugherty_s_C_SMTP_Server, emailDomain);
+            _heloResponse = String.Format(Resources.Protocol_MESSAGE_DEFAULT_HELO_RESPONSE_250_0, emailDomain);
         }
-
-        #endregion
-
-        #region Properties
 
         #endregion
 
@@ -204,8 +159,8 @@ namespace src.SmtpServer
         /// </summary>
         public virtual string WelcomeMessage
         {
-            get { return welcomeMessage; }
-            set { welcomeMessage = String.Format(value, domain); }
+            get { return _welcomeMessage; }
+            set { _welcomeMessage = String.Format(value, _domain); }
         }
 
         /// <summary>
@@ -215,8 +170,8 @@ namespace src.SmtpServer
         /// </summary>
         public virtual string HeloResponse
         {
-            get { return heloResponse; }
-            set { heloResponse = String.Format(value, domain); }
+            get { return _heloResponse; }
+            set { _heloResponse = String.Format(value, _domain); }
         }
 
         #endregion
@@ -236,7 +191,7 @@ namespace src.SmtpServer
             // allowed.  Is there a better way to do this?
             lock (this)
             {
-                currentConnectionId = connectionId++;
+                currentConnectionId = _connectionId++;
             }
 
             using (SMTPContext context = new SMTPContext(currentConnectionId, socket))
@@ -356,7 +311,7 @@ namespace src.SmtpServer
                 if (inputs.Count == 2)
                 {
                     context.ClientDomain = inputs[1];
-                    context.LastCommand = COMMAND_HELO;
+                    context.LastCommand = CommandHelo;
                     context.WriteLine(HeloResponse);
                 }
                 else
@@ -393,7 +348,7 @@ namespace src.SmtpServer
         private static void Mail(SMTPContext context, string argument)
         {
             bool addressValid = false;
-            if (context.LastCommand == COMMAND_HELO)
+            if (context.LastCommand == CommandHelo)
             {
                 string address = ParseAddress(argument);
                 if (address != null)
@@ -402,7 +357,7 @@ namespace src.SmtpServer
                     {
                         var emailAddress = new MailAddress(address);
                         context.Message.FromAddress = emailAddress;
-                        context.LastCommand = COMMAND_MAIL;
+                        context.LastCommand = CommandMail;
                         addressValid = true;
                         context.WriteLine(Resources.Protocol_MESSAGE_OK_250_OK);
                         if (log.IsDebugEnabled)
@@ -441,7 +396,7 @@ namespace src.SmtpServer
         /// </summary>
         private void Rcpt(SMTPContext context, string argument)
         {
-            if (context.LastCommand == COMMAND_MAIL || context.LastCommand == COMMAND_RCPT)
+            if (context.LastCommand == CommandMail || context.LastCommand == CommandRcpt)
             {
                 string address = ParseAddress(argument);
                 var messageInvalidAddress = Resources.Protocol_MESSAGE_INVALID_ADDRESS_451_Address_is_invalid;
@@ -452,10 +407,10 @@ namespace src.SmtpServer
                         var emailAddress = new MailAddress(address);
 
                         // Check to make sure we want to accept this message.
-                        if (recipientFilter.AcceptRecipient(context, emailAddress))
+                        if (_recipientFilter.AcceptRecipient(context, emailAddress))
                         {
                             context.Message.AddToAddress(emailAddress);
-                            context.LastCommand = COMMAND_RCPT;
+                            context.LastCommand = CommandRcpt;
                             context.WriteLine(Resources.Protocol_MESSAGE_OK_250_OK);
                             if (log.IsDebugEnabled)
                                 log.Debug(String.Format(Resources.Log_Connection_0_RcptTo_address_1_accepted,
@@ -506,7 +461,7 @@ namespace src.SmtpServer
             var header = new StringBuilder();
             header.AppendFormat(Resources.EMAIL_Received_from_0_0_1, context.ClientDomain, clientEndPoint.Address);
             header.AppendLine();
-            header.AppendFormat(Resources.EMAIL_by_0_Eric_Daugherty_s_C_Email_Server, domain);
+            header.AppendFormat(Resources.EMAIL_by_0_Eric_Daugherty_s_C_Email_Server, _domain);
             header.AppendLine();
             header.Append("     " + DateTime.Now);
             header.AppendLine();
@@ -522,7 +477,7 @@ namespace src.SmtpServer
             }
 
             // Spool the message
-            messageSpool.SpoolMessage(message);
+            _messageSpool.SpoolMessage(message);
             context.WriteLine(Resources.Protocol_MESSAGE_OK_250_OK);
 
             // Reset the connection.
@@ -539,7 +494,7 @@ namespace src.SmtpServer
         /// </summary>
         private static string ParseAddress(string input)
         {
-            Match match = ADDRESS_REGEX.Match(input);
+            Match match = addressRegex.Match(input);
             if (match.Success)
             {
                 string matchText = match.Value;
@@ -562,7 +517,7 @@ namespace src.SmtpServer
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
-            messageSpool.Dispose();
+            _messageSpool.Dispose();
         }
     }
 }

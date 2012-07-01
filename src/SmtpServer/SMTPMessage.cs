@@ -10,11 +10,11 @@ namespace src.SmtpServer
     /// <summary>
     /// Stores an incoming SMTP Message.
     /// </summary>
-    public class SMTPMessage : object
+    public class SMTPMessage
     {
         #region Constants
 
-        private static readonly string DOUBLE_NEWLINE = Environment.NewLine + Environment.NewLine;
+        private static readonly string doubleNewline = Environment.NewLine + Environment.NewLine;
 
         #endregion
 
@@ -78,7 +78,7 @@ namespace src.SmtpServer
         /// </summary>
         public SMTPMessagePart[] MessageParts
         {
-            get { return parseMessageParts(); }
+            get { return ParseMessageParts(); }
         }
 
         /// <summary>Addes an address to the recipient list.</summary>
@@ -90,7 +90,7 @@ namespace src.SmtpServer
         /// <summary>Append data to message data.</summary>
         public void AddData(String data)
         {
-            this._data.Append(data);
+            _data.Append(data);
         }
 
         #endregion
@@ -107,8 +107,8 @@ namespace src.SmtpServer
         {
             var headerFields = new Hashtable();
 
-            string[] parts = Regex.Split(partData, DOUBLE_NEWLINE);
-            string headerString = parts[0] + DOUBLE_NEWLINE;
+            string[] parts = Regex.Split(partData, doubleNewline);
+            string headerString = parts[0] + doubleNewline;
 
             MatchCollection headerKeyCollectionMatch = Regex.Matches(headerString, @"^(?<key>\S*):",
                                                                      RegexOptions.Multiline);
@@ -130,7 +130,7 @@ namespace src.SmtpServer
             return headerFields;
         }
 
-        private SMTPMessagePart[] parseMessageParts()
+        private SMTPMessagePart[] ParseMessageParts()
         {
             string message = _data.ToString();
             var contentType = (string)Headers["Content-Type"];

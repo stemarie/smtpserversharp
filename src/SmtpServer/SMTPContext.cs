@@ -185,7 +185,7 @@ namespace src.SmtpServer
         {
             if (log.IsDebugEnabled) log.Debug(String.Format(Resources.Log_Connection_0_Reset, connectionId));
             message = new SMTPMessage();
-            lastCommand = SMTPProcessor.COMMAND_HELO;
+            lastCommand = SMTPProcessor.CommandHelo;
         }
 
         /// <summary>

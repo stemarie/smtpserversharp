@@ -7,6 +7,8 @@ using NUnit.Framework;
 using log4net;
 using log4net.Config;
 using src.SmtpServer;
+using src.SmtpServer.MessageSpool;
+using src.SmtpServer.MessageSpool.Memory;
 
 namespace src_test.SmtpServer
 {
@@ -21,8 +23,8 @@ namespace src_test.SmtpServer
         [SetUp]
         public void Setup()
         {
-            messageSpool.ClearSpool();
-            var threadlistener = 
+            _messageSpool.ClearSpool();
+            var threadlistener =
                 new Thread(Listener)
                     {
                         IsBackground = true
@@ -35,32 +37,32 @@ namespace src_test.SmtpServer
         [TearDown]
         public void Teardown()
         {
-            listener.Stop();
+            _listener.Stop();
         }
 
         #endregion
 
         private static readonly IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 9900);
-        private TcpListener listener;
-        private readonly MemoryMessageSpool messageSpool;
+        private TcpListener _listener;
+        private readonly IMessageSpool _messageSpool;
 
         public SMTPProcessorTest()
         {
             LogManager.ResetConfiguration();
             BasicConfigurator.Configure();
-            messageSpool = new MemoryMessageSpool();
+            _messageSpool = new MemoryMessageSpool();
         }
 
         private void Listener()
         {
             try
             {
-                var processor = new SMTPProcessor("testdomain.com", messageSpool);
+                var processor = new SMTPProcessor("testdomain.com", _messageSpool);
 
-                listener = new TcpListener(endPoint);
-                listener.Start();
+                _listener = new TcpListener(endPoint);
+                _listener.Start();
                 Console.WriteLine("Socket listener started...");
-                Socket clientSocket = listener.AcceptSocket();
+                Socket clientSocket = _listener.AcceptSocket();
                 processor.ProcessConnection(clientSocket);
             }
             catch (Exception exception)
@@ -177,7 +179,7 @@ namespace src_test.SmtpServer
 
             Disconnect(socket);
 
-            SMTPMessage message = messageSpool.NextMessage();
+            SMTPMessage message = _messageSpool.NextMessage();
 
             Console.WriteLine("Message Recieved: ");
             Console.Write(message.Data);
