@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src", "src\src.csproj", "{3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src-test", "src-test\src-test.csproj", "{5D3D1AA9-277D-401D-B17F-C2991DC542A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemorySpool", "MemorySpool\MemorySpool.csproj", "{060DAE15-B425-43B4-8F9A-29CB1FE1F368}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSpool.Memory", "MemorySpool\MessageSpool.Memory.csproj", "{060DAE15-B425-43B4-8F9A-29CB1FE1F368}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSpool", "FileSpool\FileSpool.csproj", "{492EFB34-F456-4A47-8011-EA211B72FF9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSpool.File", "FileSpool\MessageSpool.File.csproj", "{492EFB34-F456-4A47-8011-EA211B72FF9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

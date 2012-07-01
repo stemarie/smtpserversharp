@@ -3,11 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using NUnit.Framework;
 using log4net;
 using log4net.Config;
+using NUnit.Framework;
 using src.SmtpServer;
-using src.SmtpServer.MessageSpool;
 using src.SmtpServer.MessageSpool.Memory;
 
 namespace src_test.SmtpServer

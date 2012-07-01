@@ -64,7 +64,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SmtpSender\ISMTPSender.cs" />
-    <Compile Include="SmtpServer\MessageSpool\IMessageSpool.cs" />
+    <Compile Include="SmtpServer\IMessageSpool.cs" />
     <Compile Include="SmtpServer\RecipientFilter\IRecipientFilter.cs" />
     <Compile Include="SmtpServer\RecipientFilter\Local\LocalRecipientFilter.cs" />
     <Compile Include="SmtpServer\SMTPContext.cs" />

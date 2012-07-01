@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using log4net;
 using src.Properties;
-using src.SmtpServer.MessageSpool;
 using src.SmtpServer.RecipientFilter;
 using src.SmtpServer.RecipientFilter.Local;
 

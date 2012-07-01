@@ -60,9 +60,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MemorySpool\MemorySpool.csproj">
+    <ProjectReference Include="..\MemorySpool\MessageSpool.Memory.csproj">
       <Project>{060DAE15-B425-43B4-8F9A-29CB1FE1F368}</Project>
-      <Name>MemorySpool</Name>
+      <Name>MessageSpool.Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\src\src.csproj">
       <Project>{347EF6DB-F563-40FF-A645-BB7AD2B1AE84}</Project>

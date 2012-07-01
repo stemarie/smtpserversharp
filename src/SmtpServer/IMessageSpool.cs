@@ -1,6 +1,6 @@
 using System;
 
-namespace src.SmtpServer.MessageSpool
+namespace src.SmtpServer
 {
     /// <summary>
     /// Provides an interface for the SMTPProcessor to use

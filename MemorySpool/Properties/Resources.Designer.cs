@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace src.SmtpServer.MessageSpool.Memory.Properties {
-    using System;
-    
-    
+namespace src.SmtpServer.MessageSpool.Memory.Properties
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
