@@ -9,8 +9,8 @@ namespace src.Net
     /// </summary>
     public class ConnectionWrapper : IDisposable
     {
-        private readonly ConnectionProcessor processor;
-        private readonly Socket socket;
+        private readonly ConnectionProcessor _processor;
+        private readonly Socket _socket;
 
         /// <summary>
         /// Create a ConnectionWrapper to allow for a thread start.
@@ -19,8 +19,8 @@ namespace src.Net
         /// <param name="socket"></param>
         public ConnectionWrapper(ConnectionProcessor processor, Socket socket)
         {
-            this.processor = processor;
-            this.socket = socket;
+            _processor = processor;
+            _socket = socket;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace src.Net
         /// </summary>
         public void Start()
         {
-            processor(socket);
+            _processor(_socket);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace src.Net
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
-            socket.Dispose();
+            _socket.Dispose();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace src.SmtpServer
     {
         #region Constants
 
-        private static readonly string doubleNewline = Environment.NewLine + Environment.NewLine;
+        private static readonly string DoubleNewline = Environment.NewLine + Environment.NewLine;
 
         #endregion
 
@@ -32,10 +32,10 @@ namespace src.SmtpServer
         /// </summary>
         public SMTPMessagePart(string data)
         {
-            string[] parts = Regex.Split(data, doubleNewline);
+            string[] parts = Regex.Split(data, DoubleNewline);
 
-            _headerData = parts[0] + doubleNewline;
-            _bodyData = parts[1] + doubleNewline;
+            _headerData = parts[0] + DoubleNewline;
+            _bodyData = parts[1] + DoubleNewline;
         }
 
         #endregion

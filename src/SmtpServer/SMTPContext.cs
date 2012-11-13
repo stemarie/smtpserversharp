@@ -24,19 +24,19 @@ namespace src.SmtpServer
         #region Variables
 
         /// <summary>Default Logger</summary>
-        private static readonly ILog log = LogManager.GetLogger(typeof(SMTPContext));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(SMTPContext));
 
         /// <summary>Logs all IO.  Seperate from normal Logger.</summary>
-        private static readonly ILog ioLog = LogManager.GetLogger("IO." + typeof(SMTPContext));
+        private static readonly ILog IoLog = LogManager.GetLogger("IO." + typeof(SMTPContext));
 
         /// <summary>The unique ID assigned to this connection</summary>
-        private readonly long connectionId;
+        private readonly long _connectionId;
 
         /// <summary>Encoding to use to send/receive data from the socket.</summary>
-        private readonly Encoding encoding;
+        private readonly Encoding _encoding;
 
         /// <summary>The socket to the client.</summary>
-        private readonly Socket socket;
+        private readonly Socket _socket;
 
         /// <summary>
         /// It is possible that more than one line will be in
@@ -44,13 +44,13 @@ namespace src.SmtpServer
         /// that has been read from the socket but not requested by the
         /// ReadLine command yet.
         /// </summary>
-        private StringBuilder inputBuffer;
+        private StringBuilder _inputBuffer;
 
         /// <summary>Last successful command received.</summary>
-        private int lastCommand;
+        private int _lastCommand;
 
         /// <summary>The incoming message.</summary>
-        private SMTPMessage message;
+        private SMTPMessage _message;
 
         #endregion
 
@@ -61,23 +61,22 @@ namespace src.SmtpServer
         /// </summary>
         public SMTPContext(long connectionId, Socket socket)
         {
-            if (log.IsDebugEnabled)
-                log.Debug(
-                    String.Format(
-                        Resources.Log_Connection_0_New_connection_from_client_1,
-                        connectionId,
-                        socket.RemoteEndPoint));
+            if (Log.IsDebugEnabled)
+                Log.DebugFormat(
+                    Resources.Log_Connection_0_New_connection_from_client_1,
+                    connectionId,
+                    socket.RemoteEndPoint);
 
-            this.connectionId = connectionId;
-            lastCommand = -1;
-            this.socket = socket;
-            message = new SMTPMessage();
+            _connectionId = connectionId;
+            _lastCommand = -1;
+            _socket = socket;
+            _message = new SMTPMessage();
 
             // Set the encoding to ASCII.  
-            encoding = Encoding.ASCII;
+            _encoding = Encoding.ASCII;
 
             // Initialize the input buffer
-            inputBuffer = new StringBuilder();
+            _inputBuffer = new StringBuilder();
         }
 
         #endregion
@@ -89,7 +88,7 @@ namespace src.SmtpServer
         /// </summary>
         public long ConnectionId
         {
-            get { return connectionId; }
+            get { return _connectionId; }
         }
 
         /// <summary>
@@ -97,8 +96,8 @@ namespace src.SmtpServer
         /// </summary>
         public int LastCommand
         {
-            get { return lastCommand; }
-            set { lastCommand = value; }
+            get { return _lastCommand; }
+            set { _lastCommand = value; }
         }
 
         /// <summary>
@@ -111,7 +110,7 @@ namespace src.SmtpServer
         /// </summary>
         public Socket Socket
         {
-            get { return socket; }
+            get { return _socket; }
         }
 
         /// <summary>
@@ -119,8 +118,8 @@ namespace src.SmtpServer
         /// </summary>
         public SMTPMessage Message
         {
-            get { return message; }
-            set { message = value; }
+            get { return _message; }
+            set { _message = value; }
         }
 
         #endregion
@@ -135,8 +134,9 @@ namespace src.SmtpServer
         /// <param name="data">The data to write the the client.</param>
         public void WriteLine(string data)
         {
-            if (ioLog.IsDebugEnabled) ioLog.Debug(String.Format(Resources.Log_Connection_0_Wrote_Line_1, connectionId, data));
-            socket.Send(encoding.GetBytes(data + EOL));
+            if (IoLog.IsDebugEnabled)
+                IoLog.DebugFormat(Resources.Log_Connection_0_Wrote_Line_1, _connectionId, data);
+            _socket.Send(_encoding.GetBytes(data + EOL));
         }
 
         /// <summary>
@@ -160,17 +160,17 @@ namespace src.SmtpServer
             do
             {
                 // Read the input data.
-                int count = socket.Receive(byteBuffer);
+                int count = _socket.Receive(byteBuffer);
 
                 if (count == 0)
                 {
-                    log.Debug(Resources.Log_Socket_closed_before_end_of_line_received);
+                    Log.Debug(Resources.Log_Socket_closed_before_end_of_line_received);
                     return null;
                 }
 
-                inputBuffer.Append(encoding.GetString(byteBuffer, 0, count));
-                if (ioLog.IsDebugEnabled)
-                    ioLog.Debug(String.Format(Resources.Log_Connection_0_Read_1, connectionId, inputBuffer));
+                _inputBuffer.Append(_encoding.GetString(byteBuffer, 0, count));
+                if (IoLog.IsDebugEnabled)
+                    IoLog.DebugFormat(Resources.Log_Connection_0_Read_1, _connectionId, _inputBuffer);
             } while ((output = ReadBuffer()) == null);
 
             // IO Log statement is in ReadBuffer...
@@ -183,9 +183,10 @@ namespace src.SmtpServer
         /// </summary>
         public void Reset()
         {
-            if (log.IsDebugEnabled) log.Debug(String.Format(Resources.Log_Connection_0_Reset, connectionId));
-            message = new SMTPMessage();
-            lastCommand = SMTPProcessor.CommandHelo;
+            if (Log.IsDebugEnabled) 
+                Log.DebugFormat(Resources.Log_Connection_0_Reset, _connectionId);
+            _message = new SMTPMessage();
+            _lastCommand = SMTPProcessor.CommandHelo;
         }
 
         /// <summary>
@@ -193,7 +194,7 @@ namespace src.SmtpServer
         /// </summary>
         public void Close()
         {
-            socket.Close();
+            _socket.Close();
         }
 
         #endregion
@@ -208,16 +209,16 @@ namespace src.SmtpServer
         private string ReadBuffer()
         {
             // If the buffer has data, check for a full line.
-            if (inputBuffer.Length > 0)
+            if (_inputBuffer.Length > 0)
             {
-                string buffer = inputBuffer.ToString();
+                string buffer = _inputBuffer.ToString();
                 int eolIndex = buffer.IndexOf(EOL, StringComparison.Ordinal);
                 if (eolIndex != -1)
                 {
                     string output = buffer.Substring(0, eolIndex);
-                    inputBuffer = new StringBuilder(buffer.Substring(eolIndex + 2));
-                    if (ioLog.IsDebugEnabled)
-                        ioLog.Debug(String.Format(Resources.Log_Connection_0_Read_Line_1, connectionId, output));
+                    _inputBuffer = new StringBuilder(buffer.Substring(eolIndex + 2));
+                    if (IoLog.IsDebugEnabled)
+                        IoLog.DebugFormat(Resources.Log_Connection_0_Read_Line_1, _connectionId, output);
                     return output;
                 }
             }
@@ -232,7 +233,7 @@ namespace src.SmtpServer
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
-            socket.Dispose();
+            _socket.Dispose();
         }
     }
 }

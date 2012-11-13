@@ -203,11 +203,10 @@ namespace src.SmtpServer
                 }
                 catch (Exception exception)
                 {
-                    log.Error(
-                        String.Format(
-                            Resources.Log_ProcessConnection_Connection_0_Error_1,
-                            context.ConnectionId,
-                            exception),
+                    log.ErrorFormat(
+                        Resources.Log_ProcessConnection_Connection_0_Error_1,
+                        context.ConnectionId,
+                        exception,
                         exception);
                 }
             }
@@ -246,7 +245,7 @@ namespace src.SmtpServer
                         continue;
                     }
 
-                    log.Debug(string.Format(Resources.Log_ProcessCommands_ProcessCommands_Read_0, inputLine));
+                    log.DebugFormat(Resources.Log_ProcessCommands_ProcessCommands_Read_0, inputLine);
                     String[] inputs = inputLine.Split(" ".ToCharArray());
 
                     var messageUnknownCommand = Resources.Protocol_MESSAGE_UNKNOWN_COMMAND_500_Command_Unrecognized;
@@ -292,9 +291,9 @@ namespace src.SmtpServer
                 }
                 catch (Exception exception)
                 {
-                    log.Error(
-                        String.Format(Resources.Log_ProcessCommands_Connection_0_Exception_occured_while_processing_commands_1,
-                                      context.ConnectionId, exception), exception);
+                    log.ErrorFormat(
+                        Resources.Log_ProcessCommands_Connection_0_Exception_occured_while_processing_commands_1,
+                        context.ConnectionId, exception, exception);
                     context.WriteLine(Resources.Protocol_MESSAGE_SYSTEM_ERROR_554_Transaction_failed);
                 }
             }
@@ -360,8 +359,8 @@ namespace src.SmtpServer
                         addressValid = true;
                         context.WriteLine(Resources.Protocol_MESSAGE_OK_250_OK);
                         if (log.IsDebugEnabled)
-                            log.Debug(String.Format(Resources.Log_Mail_Connection_0_MailFrom_address_1_accepted,
-                                                    context.ConnectionId, address));
+                            log.DebugFormat(Resources.Log_Mail_Connection_0_MailFrom_address_1_accepted,
+                                            context.ConnectionId, address);
                     }
                     catch (FormatException ex)
                     {
@@ -377,10 +376,9 @@ namespace src.SmtpServer
                 if (!addressValid)
                 {
                     if (log.IsDebugEnabled)
-                        log.Debug(
-                            String.Format(
-                                Resources.Log_Connection_0_MailFrom_argument_1_rejected_Should_be_from_username_domain_com,
-                                context.ConnectionId, argument));
+                        log.DebugFormat(
+                            Resources.Log_Connection_0_MailFrom_argument_1_rejected_Should_be_from_username_domain_com,
+                            context.ConnectionId, argument);
                     context.WriteLine(Resources.Protocol_MESSAGE_INVALID_ADDRESS_451_Address_is_invalid);
                 }
             }
@@ -412,36 +410,33 @@ namespace src.SmtpServer
                             context.LastCommand = CommandRcpt;
                             context.WriteLine(Resources.Protocol_MESSAGE_OK_250_OK);
                             if (log.IsDebugEnabled)
-                                log.Debug(String.Format(Resources.Log_Connection_0_RcptTo_address_1_accepted,
-                                                        context.ConnectionId, address));
+                                log.DebugFormat(Resources.Log_Connection_0_RcptTo_address_1_accepted,
+                                                context.ConnectionId, address);
                         }
                         else
                         {
                             context.WriteLine(Resources.Protocol_MESSAGE_UNKNOWN_USER_550_User_does_not_exist);
                             if (log.IsDebugEnabled)
-                                log.Debug(
-                                    String.Format(
-                                        Resources.Log_Connection_0_RcptTo_address_1_rejected_Did_not_pass_Address_Filter,
-                                        context.ConnectionId, address));
+                                log.DebugFormat(
+                                    Resources.Log_Connection_0_RcptTo_address_1_rejected_Did_not_pass_Address_Filter,
+                                    context.ConnectionId, address);
                         }
                     }
                     catch (FormatException)
                     {
                         if (log.IsDebugEnabled)
-                            log.Debug(
-                                String.Format(
-                                    Resources.Log_Connection_0_RcptTo_argument_1_rejected_Should_be_from_username_domain_com,
-                                    context.ConnectionId, argument));
+                            log.DebugFormat(
+                                Resources.Log_Connection_0_RcptTo_argument_1_rejected_Should_be_from_username_domain_com,
+                                context.ConnectionId, argument);
                         context.WriteLine(messageInvalidAddress);
                     }
                 }
                 else
                 {
                     if (log.IsDebugEnabled)
-                        log.Debug(
-                            String.Format(
-                                Resources.Log_Connection_0_RcptTo_argument_1_rejected_Should_be_from_username_domain_com,
-                                context.ConnectionId, argument));
+                        log.DebugFormat(
+                            Resources.Log_Connection_0_RcptTo_argument_1_rejected_Should_be_from_username_domain_com,
+                            context.ConnectionId, argument);
                     context.WriteLine(messageInvalidAddress);
                 }
             }

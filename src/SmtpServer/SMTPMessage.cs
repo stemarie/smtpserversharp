@@ -14,7 +14,7 @@ namespace src.SmtpServer
     {
         #region Constants
 
-        private static readonly string doubleNewline = Environment.NewLine + Environment.NewLine;
+        private static readonly string DoubleNewline = Environment.NewLine + Environment.NewLine;
 
         #endregion
 
@@ -107,8 +107,8 @@ namespace src.SmtpServer
         {
             var headerFields = new Hashtable();
 
-            string[] parts = Regex.Split(partData, doubleNewline);
-            string headerString = parts[0] + doubleNewline;
+            string[] parts = Regex.Split(partData, DoubleNewline);
+            string headerString = parts[0] + DoubleNewline;
 
             MatchCollection headerKeyCollectionMatch = Regex.Matches(headerString, @"^(?<key>\S*):",
                                                                      RegexOptions.Multiline);

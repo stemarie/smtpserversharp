@@ -21,7 +21,7 @@ namespace src.Net
     {
         #region Variables
 
-        private static readonly ILog log = LogManager.GetLogger(typeof(SimpleServer));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(SimpleServer));
         private readonly int _port;
         private readonly ConnectionProcessor _processor;
         private bool _isRunning;
@@ -71,7 +71,7 @@ namespace src.Net
                 }
                 catch (Exception ex)
                 {
-                    log.Error("Run error", ex);
+                    Log.Error("Run error", ex);
                 }
             }
         }
