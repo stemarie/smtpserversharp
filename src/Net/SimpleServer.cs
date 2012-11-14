@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Threading;
 using log4net;
 
-namespace src.Net
+namespace SmtpServer.Net
 {
     /// <summary>
     /// This class provides a bare bones implementation

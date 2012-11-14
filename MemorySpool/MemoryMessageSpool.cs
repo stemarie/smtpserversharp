@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace src.SmtpServer.MessageSpool.Memory
+namespace SmtpServer.MessageSpool.Memory
 {
     /// <summary>
     /// Provides a memory based IMessageSpool.

@@ -1,6 +1,6 @@
 using System.Net.Sockets;
 
-namespace src.Net
+namespace SmtpServer.Net
 {
     /// <summary>
     /// The delegate that is called when to process a new connection (Socket).

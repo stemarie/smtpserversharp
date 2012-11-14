@@ -5,8 +5,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
-    <RootNamespace>src_test</RootNamespace>
-    <AssemblyName>src-test</AssemblyName>
+    <RootNamespace>SmtpServer.Tests</RootNamespace>
+    <AssemblyName>SmtpServer.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -64,9 +64,9 @@
       <Project>{060DAE15-B425-43B4-8F9A-29CB1FE1F368}</Project>
       <Name>MessageSpool.Memory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\src.csproj">
+    <ProjectReference Include="..\src\SmtpServer.csproj">
       <Project>{347EF6DB-F563-40FF-A645-BB7AD2B1AE84}</Project>
-      <Name>src</Name>
+      <Name>SmtpServer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

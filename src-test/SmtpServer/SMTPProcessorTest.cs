@@ -3,13 +3,12 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using SmtpServer.MessageSpool.Memory;
 using log4net;
 using log4net.Config;
 using NUnit.Framework;
-using src.SmtpServer;
-using src.SmtpServer.MessageSpool.Memory;
 
-namespace src_test.SmtpServer
+namespace SmtpServer.Tests.SmtpServer
 {
     [TestFixture]
     // <summary>
@@ -41,7 +40,7 @@ namespace src_test.SmtpServer
 
         #endregion
 
-        private static readonly IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 9900);
+        private static readonly IPEndPoint EndPoint = new IPEndPoint(IPAddress.Loopback, 9900);
         private TcpListener _listener;
         private readonly IMessageSpool _messageSpool;
 
@@ -58,7 +57,7 @@ namespace src_test.SmtpServer
             {
                 var processor = new SMTPProcessor("testdomain.com", _messageSpool);
 
-                _listener = new TcpListener(endPoint);
+                _listener = new TcpListener(EndPoint);
                 _listener.Start();
                 Console.WriteLine("Socket listener started...");
                 Socket clientSocket = _listener.AcceptSocket();
@@ -75,7 +74,7 @@ namespace src_test.SmtpServer
         {
             Console.WriteLine("Connecting...");
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            socket.Connect(endPoint);
+            socket.Connect(EndPoint);
 
             // Read Welcome Message
             string line = ReadLine(socket);
@@ -180,7 +179,7 @@ namespace src_test.SmtpServer
 
             SMTPMessage message = _messageSpool.NextMessage();
 
-            Console.WriteLine("Message Recieved: ");
+            Console.WriteLine("Message Received: ");
             Console.Write(message.Data);
         }
 

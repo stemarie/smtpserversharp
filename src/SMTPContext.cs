@@ -1,10 +1,10 @@
 using System;
 using System.Net.Sockets;
 using System.Text;
+using SmtpServer.Properties;
 using log4net;
-using src.Properties;
 
-namespace src.SmtpServer
+namespace SmtpServer
 {
     /// <summary>
     /// Maintains the current state for a SMTP client connection.

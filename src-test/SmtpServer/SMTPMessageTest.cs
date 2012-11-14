@@ -1,7 +1,6 @@
 using NUnit.Framework;
-using src.SmtpServer;
 
-namespace src_test.SmtpServer
+namespace SmtpServer.Tests.SmtpServer
 {
     [TestFixture]
     public class SMTPMessageTest

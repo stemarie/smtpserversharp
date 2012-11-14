@@ -1,6 +1,6 @@
 using System.Net.Mail;
 
-namespace src.SmtpServer.RecipientFilter.Local
+namespace SmtpServer.RecipientFilter.Local
 {
     /// <summary>
     /// Allows all email addresses addressed to the local domain specified

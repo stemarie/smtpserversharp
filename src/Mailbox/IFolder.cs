@@ -1,6 +1,6 @@
 using System.Net.Mail;
 
-namespace src.Mailbox
+namespace SmtpServer.Mailbox
 {
     /// <summary>
     /// The folder class defines the interface used to 

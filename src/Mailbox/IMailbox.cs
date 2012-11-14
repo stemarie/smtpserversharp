@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace src.Mailbox
+namespace SmtpServer.Mailbox
 {
     public interface IMailbox
     {

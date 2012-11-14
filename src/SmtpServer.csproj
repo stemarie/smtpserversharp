@@ -5,8 +5,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
-    <RootNamespace>src</RootNamespace>
-    <AssemblyName>SRC</AssemblyName>
+    <RootNamespace>SmtpServer</RootNamespace>
+    <AssemblyName>SmtpServer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -64,13 +64,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SmtpSender\ISMTPSender.cs" />
-    <Compile Include="SmtpServer\IMessageSpool.cs" />
-    <Compile Include="SmtpServer\RecipientFilter\IRecipientFilter.cs" />
-    <Compile Include="SmtpServer\RecipientFilter\Local\LocalRecipientFilter.cs" />
-    <Compile Include="SmtpServer\SMTPContext.cs" />
-    <Compile Include="SmtpServer\SMTPMessage.cs" />
-    <Compile Include="SmtpServer\SMTPMessagePart.cs" />
-    <Compile Include="SmtpServer\SMTPProcessor.cs" />
+    <Compile Include="IMessageSpool.cs" />
+    <Compile Include="RecipientFilter\IRecipientFilter.cs" />
+    <Compile Include="RecipientFilter\Local\LocalRecipientFilter.cs" />
+    <Compile Include="SMTPContext.cs" />
+    <Compile Include="SMTPMessage.cs" />
+    <Compile Include="SMTPMessagePart.cs" />
+    <Compile Include="SMTPProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\Serializer.cs" />
   </ItemGroup>

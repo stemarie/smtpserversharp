@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 
-namespace src.SmtpServer
+namespace SmtpServer
 {
     /// <summary>
     /// Stores a single part of a multipart message.

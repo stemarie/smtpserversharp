@@ -1,6 +1,6 @@
 using System;
 
-namespace src.SmtpServer
+namespace SmtpServer
 {
     /// <summary>
     /// Provides an interface for the SMTPProcessor to use

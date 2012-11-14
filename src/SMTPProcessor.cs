@@ -5,12 +5,12 @@ using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
+using SmtpServer.Properties;
+using SmtpServer.RecipientFilter;
+using SmtpServer.RecipientFilter.Local;
 using log4net;
-using src.Properties;
-using src.SmtpServer.RecipientFilter;
-using src.SmtpServer.RecipientFilter.Local;
 
-namespace src.SmtpServer
+namespace SmtpServer
 {
     /// <summary>
     /// SMTPProcessor handles a single SMTP client connection.  This
@@ -46,14 +46,14 @@ namespace src.SmtpServer
         public const int CommandData = 6;
 
         // Regular Expressions
-        private static readonly Regex addressRegex = new Regex("<.+@.+>", RegexOptions.IgnoreCase);
+        private static readonly Regex AddressRegex = new Regex("<.+@.+>", RegexOptions.IgnoreCase);
 
         #endregion
 
         #region Variables
 
         /// <summary>Default Logger</summary>
-        private static readonly ILog log = LogManager.GetLogger(typeof(SMTPProcessor));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(SMTPProcessor));
 
         /// <summary>Incoming Message spool</summary>
         private readonly IMessageSpool _messageSpool;
@@ -203,10 +203,9 @@ namespace src.SmtpServer
                 }
                 catch (Exception exception)
                 {
-                    log.ErrorFormat(
+                    Log.ErrorFormat(
                         Resources.Log_ProcessConnection_Connection_0_Error_1,
                         context.ConnectionId,
-                        exception,
                         exception);
                 }
             }
@@ -245,7 +244,7 @@ namespace src.SmtpServer
                         continue;
                     }
 
-                    log.DebugFormat(Resources.Log_ProcessCommands_ProcessCommands_Read_0, inputLine);
+                    Log.DebugFormat(Resources.Log_ProcessCommands_ProcessCommands_Read_0, inputLine);
                     String[] inputs = inputLine.Split(" ".ToCharArray());
 
                     var messageUnknownCommand = Resources.Protocol_MESSAGE_UNKNOWN_COMMAND_500_Command_Unrecognized;
@@ -291,7 +290,7 @@ namespace src.SmtpServer
                 }
                 catch (Exception exception)
                 {
-                    log.ErrorFormat(
+                    Log.ErrorFormat(
                         Resources.Log_ProcessCommands_Connection_0_Exception_occured_while_processing_commands_1,
                         context.ConnectionId, exception, exception);
                     context.WriteLine(Resources.Protocol_MESSAGE_SYSTEM_ERROR_554_Transaction_failed);
@@ -358,25 +357,25 @@ namespace src.SmtpServer
                         context.LastCommand = CommandMail;
                         addressValid = true;
                         context.WriteLine(Resources.Protocol_MESSAGE_OK_250_OK);
-                        if (log.IsDebugEnabled)
-                            log.DebugFormat(Resources.Log_Mail_Connection_0_MailFrom_address_1_accepted,
+                        if (Log.IsDebugEnabled)
+                            Log.DebugFormat(Resources.Log_Mail_Connection_0_MailFrom_address_1_accepted,
                                             context.ConnectionId, address);
                     }
                     catch (FormatException ex)
                     {
-                        log.Warn(Resources.Log_Invalid_E_Mail_address_detected, ex);
+                        Log.Warn(Resources.Log_Invalid_E_Mail_address_detected, ex);
                     }
                     catch (Exception ex)
                     {
-                        log.Error(Resources.Log_Unknown_exception_occured, ex);
+                        Log.Error(Resources.Log_Unknown_exception_occured, ex);
                     }
                 }
 
                 // If the address is invalid, inform the client.
                 if (!addressValid)
                 {
-                    if (log.IsDebugEnabled)
-                        log.DebugFormat(
+                    if (Log.IsDebugEnabled)
+                        Log.DebugFormat(
                             Resources.Log_Connection_0_MailFrom_argument_1_rejected_Should_be_from_username_domain_com,
                             context.ConnectionId, argument);
                     context.WriteLine(Resources.Protocol_MESSAGE_INVALID_ADDRESS_451_Address_is_invalid);
@@ -409,23 +408,23 @@ namespace src.SmtpServer
                             context.Message.AddToAddress(emailAddress);
                             context.LastCommand = CommandRcpt;
                             context.WriteLine(Resources.Protocol_MESSAGE_OK_250_OK);
-                            if (log.IsDebugEnabled)
-                                log.DebugFormat(Resources.Log_Connection_0_RcptTo_address_1_accepted,
+                            if (Log.IsDebugEnabled)
+                                Log.DebugFormat(Resources.Log_Connection_0_RcptTo_address_1_accepted,
                                                 context.ConnectionId, address);
                         }
                         else
                         {
                             context.WriteLine(Resources.Protocol_MESSAGE_UNKNOWN_USER_550_User_does_not_exist);
-                            if (log.IsDebugEnabled)
-                                log.DebugFormat(
+                            if (Log.IsDebugEnabled)
+                                Log.DebugFormat(
                                     Resources.Log_Connection_0_RcptTo_address_1_rejected_Did_not_pass_Address_Filter,
                                     context.ConnectionId, address);
                         }
                     }
                     catch (FormatException)
                     {
-                        if (log.IsDebugEnabled)
-                            log.DebugFormat(
+                        if (Log.IsDebugEnabled)
+                            Log.DebugFormat(
                                 Resources.Log_Connection_0_RcptTo_argument_1_rejected_Should_be_from_username_domain_com,
                                 context.ConnectionId, argument);
                         context.WriteLine(messageInvalidAddress);
@@ -433,8 +432,8 @@ namespace src.SmtpServer
                 }
                 else
                 {
-                    if (log.IsDebugEnabled)
-                        log.DebugFormat(
+                    if (Log.IsDebugEnabled)
+                        Log.DebugFormat(
                             Resources.Log_Connection_0_RcptTo_argument_1_rejected_Should_be_from_username_domain_com,
                             context.ConnectionId, argument);
                     context.WriteLine(messageInvalidAddress);
@@ -488,7 +487,7 @@ namespace src.SmtpServer
         /// </summary>
         private static string ParseAddress(string input)
         {
-            Match match = addressRegex.Match(input);
+            Match match = AddressRegex.Match(input);
             if (match.Success)
             {
                 string matchText = match.Value;

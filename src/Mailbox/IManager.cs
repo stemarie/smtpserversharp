@@ -1,4 +1,4 @@
-﻿namespace src.Mailbox
+﻿namespace SmtpServer.Mailbox
 {
     public interface IManager
     { }

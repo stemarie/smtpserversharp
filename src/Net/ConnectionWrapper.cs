@@ -1,7 +1,7 @@
 using System;
 using System.Net.Sockets;
 
-namespace src.Net
+namespace SmtpServer.Net
 {
     /// <summary>
     /// Wraps the ConnectionProcessor and Socket to allow a new thread to be

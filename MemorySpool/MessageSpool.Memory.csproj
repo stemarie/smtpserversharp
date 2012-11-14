@@ -8,8 +8,8 @@
     <ProjectGuid>{060DAE15-B425-43B4-8F9A-29CB1FE1F368}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>src.SmtpServer.MessageSpool.Memory</RootNamespace>
-    <AssemblyName>MemorySpool</AssemblyName>
+    <RootNamespace>SmtpServer.MessageSpool.Memory</RootNamespace>
+    <AssemblyName>SmtpServer.MessageSpool.Memory</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -58,9 +58,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\src.csproj">
+    <ProjectReference Include="..\src\SmtpServer.csproj">
       <Project>{347EF6DB-F563-40FF-A645-BB7AD2B1AE84}</Project>
-      <Name>src</Name>
+      <Name>SmtpServer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

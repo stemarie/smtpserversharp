@@ -1,4 +1,4 @@
-﻿namespace src.Mailbox.Storage
+﻿namespace SmtpServer.Mailbox.Storage
 {
     public interface IFolderStorage
     { }

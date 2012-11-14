@@ -2,7 +2,7 @@ using System;
 using System.Net.Mail;
 using NUnit.Framework;
 
-namespace src_test.Common
+namespace SmtpServer.Tests.Common
 {
     /// <summary>
     /// Test cases for the EmailAddress class.  These tests

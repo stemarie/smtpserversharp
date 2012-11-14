@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Linq;
+using SmtpServer.MessageSpool.File.Properties;
+using SmtpServer.Utility;
 using log4net;
-using src.Properties;
-using src.Utility;
 
-namespace src.SmtpServer.MessageSpool.File
+namespace SmtpServer.MessageSpool.File
 {
     /// <summary>
     /// Stores Spooled SMTPMessages as files.

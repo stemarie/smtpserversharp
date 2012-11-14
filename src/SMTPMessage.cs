@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace src.SmtpServer
+namespace SmtpServer
 {
     /// <summary>
     /// Stores an incoming SMTP Message.
@@ -81,7 +81,7 @@ namespace src.SmtpServer
             get { return ParseMessageParts(); }
         }
 
-        /// <summary>Addes an address to the recipient list.</summary>
+        /// <summary>Adds an address to the recipient list.</summary>
         public void AddToAddress(MailAddress address)
         {
             _recipientAddresses.Add(address);

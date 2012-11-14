@@ -1,6 +1,7 @@
-﻿using System.Net.Mail;
+﻿using System.Collections.Generic;
+using System.Net.Mail;
 
-namespace src.SmtpSender
+namespace SmtpServer.SmtpSender
 {
     public interface ISMTPSender
     {
@@ -17,6 +18,6 @@ namespace src.SmtpSender
         /// <param name="data">
         /// The raw message data.
         /// </param>
-        void DeliverMessage(string domain, MailAddress[] addresses, string data);
+        void DeliverMessage(string domain, IEnumerable<MailAddress> addresses, string data);
     }
 }

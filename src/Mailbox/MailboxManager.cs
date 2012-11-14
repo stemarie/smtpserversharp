@@ -1,4 +1,4 @@
-namespace src.Mailbox
+namespace SmtpServer.Mailbox
 {
     /// <summary>
     /// Mailbox Manager is a singleton class that provides

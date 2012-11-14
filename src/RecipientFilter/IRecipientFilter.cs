@@ -1,6 +1,6 @@
 using System.Net.Mail;
 
-namespace src.SmtpServer.RecipientFilter
+namespace SmtpServer.RecipientFilter
 {
     /// <summary>
     /// Allows filtering of incoming email by recipient address.

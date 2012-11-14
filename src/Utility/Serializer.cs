@@ -2,7 +2,7 @@
 using System.Text;
 using System.Xml.Serialization;
 
-namespace src.Utility
+namespace SmtpServer.Utility
 {
     public class Serializer<T>
         where T : class
