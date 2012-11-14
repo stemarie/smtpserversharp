@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSpool.File", "FileSp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{41CB3C72-5CA7-45D1-9C53-67A471861227}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSpool.Command", "MessageSpool.Command\MessageSpool.Command.csproj", "{FCC1E30E-7CD6-4F18-8984-CC5495172478}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpServer.Processor", "SmtpServer.Processor\SmtpServer.Processor.csproj", "{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,22 @@ Global
 		{41CB3C72-5CA7-45D1-9C53-67A471861227}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41CB3C72-5CA7-45D1-9C53-67A471861227}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{41CB3C72-5CA7-45D1-9C53-67A471861227}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FCC1E30E-7CD6-4F18-8984-CC5495172478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC1E30E-7CD6-4F18-8984-CC5495172478}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC1E30E-7CD6-4F18-8984-CC5495172478}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FCC1E30E-7CD6-4F18-8984-CC5495172478}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FCC1E30E-7CD6-4F18-8984-CC5495172478}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC1E30E-7CD6-4F18-8984-CC5495172478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCC1E30E-7CD6-4F18-8984-CC5495172478}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FCC1E30E-7CD6-4F18-8984-CC5495172478}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8F3318B1-2FC3-42DB-B0BF-55AAAD133862}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

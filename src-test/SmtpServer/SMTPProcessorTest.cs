@@ -78,7 +78,7 @@ namespace SmtpServer.Tests.SmtpServer
 
             // Read Welcome Message
             string line = ReadLine(socket);
-            Assert.IsTrue(line.StartsWith("220"), "Welcome Message not recieved.");
+            Assert.IsTrue(line.StartsWith("220"), "Welcome Message not received.");
 
             // Helo
             WriteLine(socket, "helo nunittestdomain.com");
